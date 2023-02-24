@@ -4,6 +4,11 @@
   let prevScrollHeight = 0; ///현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
   let currentScene = 0; ///현재 활성화된(눈앞에 보고있는) 씬(scroll-section)
   let enterNewScene = false; ///새로 scene이 시작된 순간 true
+  //부드러운 감속
+  let acc = 0.1; //가속도
+  let delayedYOffset = 0;
+  let rafId;
+  let rafState;
 
   const sceneInfo = [
     {
@@ -137,7 +142,7 @@
       imgElem = new Image();
       //imgElem.src = `./image/vid_test/vid_0${i+7}.jpg`
       imgElem.src = `./image/vid2/vid2_${i}.jpg`
-      sceneInfo[0].objs.videoImages.push(imgElem);
+      sceneInfo[0].objs.videoImages.push(imgElem);  
     }
 
     let imgElem2;
@@ -227,8 +232,8 @@
     switch (currentScene){ //해당 세션만 애니메이션 플레이
       case 0:
         //console.log('0 play');
-        let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-        objs.context.drawImage(objs.videoImages[sequence], 0, 0); /*뒤에 width, height 지정 가능*/
+        //let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+        //objs.context.drawImage(objs.videoImages[sequence], 0, 0); /*뒤에 width, height 지정 가능*/
         objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
 
         if (scrollRatio <= 0.22) { //in out 중간
@@ -275,8 +280,8 @@
 
       case 2:
         //console.log('2 play');
-        let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
-        objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
+        //let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
+        //objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
 
         if (scrollRatio <= 0.5) {
           //in
@@ -337,7 +342,7 @@
           }
   
           objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
-          objs.context.fillStyle = 'white';
+          objs.context.fillStyle = 'black';
           objs.context.drawImage(objs.images[0], 0, 0);
   
           /// 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
@@ -384,7 +389,7 @@
         }
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
-        objs.context.fillStyle = 'white';
+        objs.context.fillStyle = 'black';
         objs.context.drawImage(objs.images[0], 0, 0);
 
         /// 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
@@ -481,13 +486,13 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
-    if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+    if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       enterNewScene = true;
       currentScene++
       document.body.setAttribute('id', `show-scene-${currentScene}`); // 시작할때 처리해줬기 때문에 바뀔때만 처리
     }
 
-    if(yOffset < prevScrollHeight) {
+    if(delayedYOffset < prevScrollHeight) {
       enterNewScene = true;
       if(currentScene === 0) return; /// 브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
       currentScene--;
@@ -499,10 +504,39 @@
     playAnimation();
   }
 
+  function loop() {
+    delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
+
+    if (!enterNewScene) {
+      if (currentScene === 0 || currentScene === 2) {
+        const currentYOffset = delayedYOffset - prevScrollHeight;
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+        console.log('loop');
+        let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+        if (objs.videoImages[sequence]) {
+          objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+        }
+      }
+    }
+
+    rafId = requestAnimationFrame(loop);
+
+    if (Math.abs(yOffset - delayedYOffset) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
+  }
+
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset; // pageYOffset 현재 스크롤한 위치을 알 수 있음
     scrollLoop();
     checkMenu();
+    //부드러운 감속
+    if (!rafState) {
+      rafId = requestAnimationFrame(loop);
+      rafState = true;
+    }
   })
   // window.addEventListener('DOMContentLoaded', setLayout); html 요소들만 로드되면 바로 실행
   window.addEventListener('load', () => {

@@ -7,7 +7,7 @@ body{
   overflow-x: hidden;
   color: rgb(29, 29, 31); /*애플 공식*/
   letter-spacing: -0.05em;
-  background: white;
+  background: black;
 }
 p{
   line-height: 1.6;
@@ -99,7 +99,7 @@ a{
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  text-shadow: 3px 5px 5px rgb(44, 44, 44);
+  text-shadow: 3px 4px 4px rgba(44, 44, 44, 0.722);
 }
 .main-message small{
   display: block; /*다음 글자가 다음단락으로 넘어감*/
@@ -193,6 +193,8 @@ a{
 }
 .image-blend-canvas.sticky{
   position: fixed;
+  top: 0;
+	z-index: 10;
 }
 
 @media (min-width: 1024px){
