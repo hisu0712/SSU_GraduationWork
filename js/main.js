@@ -124,6 +124,8 @@
         rect2X: [ 0, 0, { start: 0, end: 0 }],
         blendHeight: [ 0, 0, { start: 0, end: 0 }],
         canvas_scale: [ 0, 0, { start: 0, end: 0 }],
+        canvasCaption_opacity: [ 0, 1, { start: 0, end: 0 }],
+        canvasCaption_translateY: [ 20, 0, { start: 0, end: 0 }],
         rectStartY: 0
       }
     }
@@ -153,6 +155,14 @@
     }
   }
   setCanvasImages();
+
+  function checkMenu() {
+    if (yOffset > 44) {
+      document.body.classList.add('local-nav-sticky');
+    } else {
+      document.body.classList.remove('local-nav-sticky');
+    }
+  }
 
   function setLayout(){
     ///각 스크롤 섹션의 높이 세팅
@@ -435,22 +445,29 @@
 
           objs.canvas.classList.add('sticky');
           objs.canvas.style.top = `${-(objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2}px`
-        }
 
-        // 올라온 이미지 사이즈 줄이기(단계)
-        if(scrollRatio > values.blendHeight[2].end) {
-          values.canvas_scale[0] = canvasScaleRatio;
-          values.canvas_scale[1] = document.body.offsetWidth / (1.5 * objs.canvas.width); // 줄어든 이미지의 최종값
-          values.canvas_scale[2].start = values.blendHeight[2].end;
-          values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2; //현재씬의 전체 스크롤 높이의 20%, 축소 처리
+          // 올라온 이미지 사이즈 줄이기(단계)
+          if(scrollRatio > values.blendHeight[2].end) {
+            values.canvas_scale[0] = canvasScaleRatio;
+            values.canvas_scale[1] = document.body.offsetWidth / (1.5 * objs.canvas.width); // 줄어든 이미지의 최종값
+            values.canvas_scale[2].start = values.blendHeight[2].end;
+            values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2; //현재씬의 전체 스크롤 높이의 20%, 축소 처리
 
-          objs.canvas.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset)})`;
-          objs.canvas.style.marginTop = 0;
-        }
-        // fixed 제거하여 스크롤되어 올라가도록(단계)
-        if (scrollRatio > values.canvas_scale[2].end && values.canvas_scale[2].end > 0) { // 초기값이 0이 아닐때
-          objs.canvas.classList.remove('sticky');
-          objs.canvas.style.marginTop = `${scrollHeight * 0.4}px` //0.2 + 0.2 duration 두개 더하기
+            objs.canvas.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset)})`;
+            objs.canvas.style.marginTop = 0;
+          }
+          // fixed 제거하여 스크롤되어 올라가도록(단계)
+          if (scrollRatio > values.canvas_scale[2].end && values.canvas_scale[2].end > 0) { // 초기값이 0이 아닐때
+            objs.canvas.classList.remove('sticky');
+            objs.canvas.style.marginTop = `${scrollHeight * 0.4}px` //0.2 + 0.2 duration 두개 더하기
+
+            values.canvasCaption_opacity[2].start = values.canvas_scale[2].end;
+            values.canvasCaption_opacity[2].end = values.canvasCaption_opacity[2].start + 0.1; // 전체 스크롤 높이에서 10% 동안
+            values.canvasCaption_translateY[2].start = values.canvas_scale[2].end;
+            values.canvasCaption_translateY[2].end = values.canvasCaption_opacity[2].start + 0.1;
+            objs.canvasCaption.style.opacity = calcValues(values.canvasCaption_opacity, currentYOffset);
+            objs.canvasCaption.style.transform = `translate3d(0, ${calcValues(values.canvasCaption_translateY, currentYOffset)}%, 0)`;
+          }
         }
 
         break;
@@ -485,6 +502,7 @@
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset; // pageYOffset 현재 스크롤한 위치을 알 수 있음
     scrollLoop();
+    checkMenu();
   })
   // window.addEventListener('DOMContentLoaded', setLayout); html 요소들만 로드되면 바로 실행
   window.addEventListener('load', () => {
