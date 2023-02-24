@@ -93,7 +93,7 @@ a{
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  text-shadow: 5px 2px 2px rgba(86, 86, 86, 0.706);
+  text-shadow: 3px 3px 3px rgb(35, 35, 35);
 }
 .main-message small{
   display: block; /*다음 글자가 다음단락으로 넘어감*/

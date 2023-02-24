@@ -114,8 +114,8 @@
         canvas: document.querySelector('.image-blend-canvas'),
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
         ImagesPath: [
-          '../image/blend-image-1.jpg',
-          '../image/blend-image-2.jpg'
+          './image/blend-image-1.jpg',
+          './image/blend-image-2.jpg'
         ],
         images: []
       }, 
@@ -133,7 +133,7 @@
     let imgElem;
     for (let i=0; i < sceneInfo[0].values.videoImagesCount; i++){
       imgElem = new Image();
-      //imgElem.src = `../image/vid_test/vid_0${i+7}.jpg`
+      //imgElem.src = `./image/vid_test/vid_0${i+7}.jpg`
       imgElem.src = `./image/vid2/vid2_${i}.jpg`
       sceneInfo[0].objs.videoImages.push(imgElem);
     }
