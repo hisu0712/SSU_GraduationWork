@@ -122,10 +122,10 @@ a{
   font-size: 3rem;
   color: rgb(29, 29, 31);
 }
-.desc-message{
-  width: 50%;
-  font-weight: bold;
-  opacity: 0;
+.sticky-elem.desc-message {
+	width: 45%;
+	font-weight: bold;
+	opacity: 0;
 }
 .pin{
   width: 1px;
@@ -217,9 +217,9 @@ a{
   .main-message small{
     font-size: 1.5vw;
   }
-  .desc-message{
-    width: 20%;
-  }
+  .sticky-elem.desc-message {
+		width: 20%;
+	}
   #scroll-section-2 .b{
     top: 20%;
     left: 53%;

@@ -159,7 +159,6 @@
       sceneInfo[3].objs.images.push(imgElem3);
     }
   }
-  setCanvasImages();
 
   function checkMenu() {
     if (yOffset > 44) {
@@ -512,7 +511,6 @@
         const currentYOffset = delayedYOffset - prevScrollHeight;
         const objs = sceneInfo[currentScene].objs;
         const values = sceneInfo[currentScene].values;
-        console.log('loop');
         let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
         if (objs.videoImages[sequence]) {
           objs.context.drawImage(objs.videoImages[sequence], 0, 0);
@@ -543,6 +541,14 @@
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
   })
-  window.addEventListener('resize', setLayout); //창을 세로로 줄일 때, 다시 높이 세팅
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 600){
+      setLayout(); // 모바일에서는 리사이즈X
+    }
+    sceneInfo[3].values.rectStartY = 0;
+  }); //창을 세로로 줄일 때, 다시 높이 세팅
+  window.addEventListener('orientationchange',setLayout); // 앞에 함수는 모바일 기기에서 방향 바꿀때
+
+  setCanvasImages();
   
 })();
