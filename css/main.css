@@ -220,6 +220,9 @@ body.before-load {
   opacity: 0;
   transition: 0.5s;
 }
+.before-load .container { /*새로고침 버그 수정*/
+  display: none; 
+}
 .before-load .loading {
   opacity: 1;
 }

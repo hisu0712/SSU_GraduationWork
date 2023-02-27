@@ -527,9 +527,24 @@
   }
   
   window.addEventListener('load', () => {
+
     document.body.classList.remove('before-load');
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+    let tempYOffset = yOffset;
+    let tempScrollCount = 0;
+    if (yOffset >0) {
+      let siId = setInterval(() => { /*새로고침 버그 수정(자동 y 스크롤)*/
+        window.scrollTo(0, tempYOffset);
+        tempYOffset += 2; /*2픽셀씩 20번*/
+
+        if (tempScrollCount > 20) {
+          clearInterval(siId);
+        }
+        tempScrollCount++
+      }, 20);
+    }
 
     window.addEventListener('scroll', () => {
       yOffset = window.pageYOffset; // pageYOffset 현재 스크롤한 위치을 알 수 있음
