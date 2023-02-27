@@ -535,19 +535,25 @@
       rafId = requestAnimationFrame(loop);
       rafState = true;
     }
-  })
-  // window.addEventListener('DOMContentLoaded', setLayout); html 요소들만 로드되면 바로 실행
+  });
+  
   window.addEventListener('load', () => {
+    document.body.classList.remove('before-load');
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
-  })
+  });
+
   window.addEventListener('resize', () => {
     if (window.innerWidth > 600){
       setLayout(); // 모바일에서는 리사이즈X
     }
     sceneInfo[3].values.rectStartY = 0; // 리사이즈 대응
   }); //창을 세로로 줄일 때, 다시 높이 세팅
+
   window.addEventListener('orientationchange',setLayout); // 앞에 함수는 모바일 기기에서 방향 바꿀때
+  document.querySelector('.loading').addEventListener('transitionend', (e) => {
+    document.body.removeChild(e.currentTarget);
+  }); // transition이 끝날때 
 
   setCanvasImages();
   
