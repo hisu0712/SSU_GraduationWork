@@ -1,3 +1,173 @@
-html{
-  font-family: 'Noto Sans KR', sans-serif;
+body {
+	margin: 0;
+	background-color: #000;
+	color: #fff;
+	font-family: Monospace;
+	font-size: 16px;
+	line-height: 24px;
+	overscroll-behavior: none;
+}
+
+a {
+	color: #ff0;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+button {
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+canvas {
+	display: block;
+}
+
+a, button, input, select {
+	pointer-events: auto;
+}
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+#AR{
+	margin: 200px auto;
+	height: 300px;
+	width: 300px;
+	display: grid; /*교체 grid-none*/
+	grid-template-columns: 50% 50%;
+	grid-gap: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+#main{
+	height: 100vh;
+	display: none; /*교체 none-flex*/
+	flex-direction: column;
+}
+
+.arButton{
+	background-color: blue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 150px;
+	width: 150px;
+	margin: 0 auto;
+}
+#topSection{
+	flex: 1;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+#bottomSection{
+	background: url("../image/web_xr_image/background_paris.jpg") no-repeat center center;
+	background-size: cover;
+	height: 150px;
+	display: flex;
+	flex-direction: row;
+	transition: 0.5s;
+}
+
+.delete-icons{
+	display: flex;
+	justify-content: center;
+}
+
+#delete{
+	position: absolute;
+	bottom: 10px;
+	width: 0px;
+	transition: 0.3s;
+}
+
+.icon-buttons{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	transition: 0.5s;
+	padding: 0 20px;
+}
+
+.iconSelect{
+	width: 35px;
+}
+
+.buttons{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	overflow-x: auto;
+	scrollbar-width: none;
+  	-ms-overflow-style: none;
+}
+
+.buttons::-webkit-scrollbar{
+	display: none;
+}
+
+.modelSelect{
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	width: 110px;
+	height: 110px;
+	background-color: rgba(255, 255, 255, 0.3);
+	margin-left: 20px;
+	border-radius: 10px;
+}
+
+.modelSelect:last-child{
+	margin-right: 20px;
+}
+
+.modelSelect img{
+	width: 100px;
+	height: 100px;
+}
+
+.dot{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	background-size: contain;
 }
