@@ -187,6 +187,9 @@ body.before-load {
   display: block;
   will-change: transform, opacity; /*메모리 사용량 증가(퍼포먼스 향상 효과)*/
 }
+.scroll-effect-end .sticky-elem {
+  display: none !important;
+}
 .sticky-elem-canvas{
   top: 0;
   height: 100%;
@@ -247,6 +250,10 @@ body.before-load {
   stroke-dashoffset: 0;
   fill: transparent;
   animation: loading-circle-ani 1s infinite;
+}
+
+.normal-content {
+  margin-bottom: 10rem;
 }
 
 @media (min-width: 1024px){
