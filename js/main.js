@@ -525,35 +525,36 @@
       rafState = false;
     }
   }
-
-  window.addEventListener('scroll', () => {
-    yOffset = window.pageYOffset; // pageYOffset 현재 스크롤한 위치을 알 수 있음
-    scrollLoop();
-    checkMenu();
-    //부드러운 감속
-    if (!rafState) {
-      rafId = requestAnimationFrame(loop);
-      rafState = true;
-    }
-  });
   
   window.addEventListener('load', () => {
     document.body.classList.remove('before-load');
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+    window.addEventListener('scroll', () => {
+      yOffset = window.pageYOffset; // pageYOffset 현재 스크롤한 위치을 알 수 있음
+      scrollLoop();
+      checkMenu();
+      //부드러운 감속
+      if (!rafState) {
+        rafId = requestAnimationFrame(loop);
+        rafState = true;
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 600){
+        setLayout(); // 모바일에서는 리사이즈X
+      }
+      sceneInfo[3].values.rectStartY = 0; // 리사이즈 대응
+    }); //창을 세로로 줄일 때, 다시 높이 세팅
+
+    window.addEventListener('orientationchange',setLayout); // 앞에 함수는 모바일 기기에서 방향 바꿀때
+
+    document.querySelector('.loading').addEventListener('transitionend', (e) => {
+      document.body.removeChild(e.currentTarget);
+    }); // transition이 끝날때 
   });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 600){
-      setLayout(); // 모바일에서는 리사이즈X
-    }
-    sceneInfo[3].values.rectStartY = 0; // 리사이즈 대응
-  }); //창을 세로로 줄일 때, 다시 높이 세팅
-
-  window.addEventListener('orientationchange',setLayout); // 앞에 함수는 모바일 기기에서 방향 바꿀때
-  document.querySelector('.loading').addEventListener('transitionend', (e) => {
-    document.body.removeChild(e.currentTarget);
-  }); // transition이 끝날때 
 
   setCanvasImages();
   

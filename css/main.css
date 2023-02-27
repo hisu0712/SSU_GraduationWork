@@ -16,6 +16,10 @@ a{
   color: rgb(29, 29, 31);
   text-decoration: none;
 }
+
+body.before-load {
+  overflow: hidden;
+}
 .global-nav{
   position: absolute; /*헤더 공간 차지하지 않도록(스크롤 처리 시)*/
   top: 0;
@@ -99,7 +103,7 @@ a{
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  text-shadow: 3px 4px 4px rgba(44, 44, 44, 0.722);
+  text-shadow: 3px 4px 4px rgb(29, 29, 31);
 }
 .main-message small{
   display: block; /*다음 글자가 다음단락으로 넘어감*/
