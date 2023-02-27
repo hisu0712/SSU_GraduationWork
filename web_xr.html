@@ -1,18 +1,63 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>WEB_AR_PHOTO</title>
-  <link rel="stylesheet" href="css/web_xr_css.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap" rel="stylesheet">
-</head>
-<body>
-  <h1>최해운</h1>
+<html lang="en">
 
-  <script src="js/web_xr_js.js"></script>
+<head>
+	<title>3D Model</title>
+	<meta charset="utf-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="./css/web_xr_css.css">
+    <script src="https://unpkg.com/three@0.133.0/build/three.js" crossorigin="anonymous"></script>
+  	<script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+</head>
+
+<body>
+    <div id="console-ui"></div>
+    <div id="AR">
+        <div class="arButton" id="0" data-value="0">AR1</div>
+        <div class="arButton" id="1" data-value="1">AR2</div>
+        <div class="arButton" id="2" data-value="2">AR3</div>
+        <div class="arButton" id="3" data-value="3">AR4</div>
+    </div>
+    <div id="main">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
+            <a class="ar-object" data-value="0" href="#">FirstScene</a>
+            <a class="ar-object" data-value="1" href="#">Backpack</a>
+            <a class="ar-object" data-value="2" href="#">Ballet</a>
+            <a class="ar-object" data-value="3" href="#">Bikini</a>
+        </div>
+        <container class="container touchScreen" id="topSection">
+            <div class="icon-buttons" id="icon-buttons">
+                <img class="iconSelect" src="./image/web_xr_image/icon_menu.png" id="button-menu">
+                <img class="iconSelect" src="./image/web_xr_image/icon_camera.png" id="button-photo">
+                <img class="iconSelect" src="./image/web_xr_image/icon_X.png" id="button-end">
+            </div>
+            <div class="delete-icons">
+                <img id="delete" src="./image/web_xr_image/delete.png">
+            </div>
+        </container>
+        <container class="container" id="bottomSection">
+            <div class="buttons" id="buttons">
+                <div class="modelSelect" id="golf" data-value="golf">
+                    <img src="./image/web_xr_image/golf.png"></div>
+                <div class="modelSelect" id="nike" data-value="nike">
+                    <img src="./image/web_xr_image/nike.png"></div>
+                <div class="modelSelect" id="padding" data-value="padding">
+                    <img src="./image/web_xr_image/padding.png"></div>
+                <div class="modelSelect" id="pilates" data-value="pilates">
+                    <img src="./image/web_xr_image/pilates.png"></div>
+                <div class="modelSelect" id="backpack" data-value="backpack">
+                    <img src="./image/web_xr_image/backpack.png"></div>
+                <div class="modelSelect" id="ballet" data-value="ballet">
+                    <img src="./image/web_xr_image/ballet.png"></div>
+                <div class="modelSelect" id="bikini" data-value="bikini">
+                    <img src="./image/web_xr_image/bikini.png"></div>
+            </div>
+        </container>
+    </div>
+	<script type="module" src="./js/web_xr_js.js"></script>
 </body>
+
 </html>
