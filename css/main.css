@@ -1,19 +1,26 @@
 /*모바일first로 작성 후 미디어쿼리에서 확장하는 방식*/
+:root{
+  --apple_black: rgb(29, 29, 31);
+  --apple_grey: #888;
+  --yellow: #e9dd2b;
+  --black: #000;
+  --white: #fff;
+}
 html{
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
 }
 body{
   overflow-x: hidden;
-  color: rgb(29, 29, 31); /*애플 공식*/
+  color: var(--apple_black);
   letter-spacing: -0.05em;
-  background: black;
+  background: var(--black);
 }
 p{
   line-height: 1.6;
 }
 a{
-  color: rgb(29, 29, 31);
+  color: var(--apple_black);
   text-decoration: none;
 }
 
@@ -78,10 +85,10 @@ body.before-load {
 }
 /*추가(밑의 두 세션)*/
 #scroll-section-0{
-  background-color: black;
+  background-color: var(--black);
 }
 #scroll-section-2 .main-message{
-  color: black;
+  color: var(--black);
 }
 #scroll-section-0 h1{
   position: relative;
@@ -90,7 +97,7 @@ body.before-load {
   font-size: 4rem; /*14px(html지정)*4*/
   text-align: center;
   /*추가*/
-  color: #e9dd2b;
+  color: var(--yellow);
 }
 .main-message{ /*줄수 상관없이 세로방향 중앙정렬*/
   display: flex;
@@ -102,7 +109,7 @@ body.before-load {
   font-size: 2.5rem;
   opacity: 0;
   /*추가*/
-  color: #fff;
+  color: var(--white);
 }
 .main-message p{
   font-weight: bold;
@@ -123,13 +130,13 @@ body.before-load {
   margin: 0 auto;
   padding: 0 1rem;/*메뉴명과 좌우패딩 맞춤*/
   font-size: 1.2rem;
-  color: #888;
+  color: var(--apple_grey);
 }
 .description strong{
   float: left;
   margin-right: 0.2em; /*위와 마찬가지로 이 글자 크기의 0.2배 정도 여백을 하고 싶어서(계산 쉬움)*/
   font-size: 3rem;
-  color: rgb(29, 29, 31);
+  color: var(--apple_black);
 }
 .sticky-elem.desc-message {
 	width: 45%;
@@ -139,7 +146,7 @@ body.before-load {
 .pin{
   width: 1px;
   height: 100px;
-  background-color: rgb(29, 29, 31);
+  background-color: var(--apple_black);
 }
 #scroll-section-2 .b{
   top: 10%;
@@ -154,25 +161,25 @@ body.before-load {
   margin: 0 auto;
   padding: 0 1rem;
   font-size: 2rem;
-  color: #888;
+  color: var(--apple_grey);
 }
 .mid-message strong{
-  color: rgb(29, 29, 31);
+  color: var(--apple_black);
 }
 .canvas-caption{
   max-width: 1000px;
   margin: -24rem auto 0; /*모바일용 문단 높이*/
   padding: 0 1rem;
   font-size: 1.2rem;
-  color: #888;
+  color: var(--apple_grey);
 }
 .footer{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 7rem;
-  background-color: darkorange;
-  color: white;
+  background-color: var(--yellow);
+  color: var(--white);
 }
 .sticky-elem{
   display: none;
@@ -219,7 +226,7 @@ body.before-load {
   bottom: 0;
   left: 0;
   z-index: 100;
-  background: white;
+  background: var(--white);
   opacity: 0;
   transition: 0.5s;
 }
@@ -243,7 +250,7 @@ body.before-load {
   animation: loading-spin 3s infinite;
 }
 .loading-circle circle {
-  stroke: black;
+  stroke: var(--black);
   stroke-width: 4;
   /*getTotalLength()로 storke의 길이를 얻어올 수 있음*/
   stroke-dasharray: 157;
