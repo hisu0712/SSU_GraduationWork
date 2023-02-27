@@ -27,8 +27,8 @@
         videoImages: []
       }, //어느시점에 이 메시지들 등장시킬지
       values: {
-        videoImagesCount: 240,
-        imageSequence: [0, 239],
+        videoImagesCount: 241,
+        imageSequence: [0, 240],
         canvas_opacity: [1, 0, { start:0.9, end: 1 }],
 
         messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
@@ -141,7 +141,7 @@
     for (let i=0; i < sceneInfo[0].values.videoImagesCount; i++){
       imgElem = new Image();
       //imgElem.src = `./image/vid_test/vid_0${i+7}.jpg`
-      imgElem.src = `./image/vid2/vid2_${i}.jpg`
+      imgElem.src = `./image/vid2_min/vid2_${i}.jpg`
       sceneInfo[0].objs.videoImages.push(imgElem);  
     }
 
