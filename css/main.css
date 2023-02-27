@@ -20,6 +20,10 @@ a{
 body.before-load {
   overflow: hidden;
 }
+.container {
+  /*iPone 가로 스크롤 방지*/
+  overflow-x: hidden;
+}
 .global-nav{
   position: absolute; /*헤더 공간 차지하지 않도록(스크롤 처리 시)*/
   top: 0;
@@ -43,6 +47,7 @@ body.before-load {
   position: fixed;
   top: 0;
   background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: saturate(180%) blur(15px); /*ios 버전*/
   backdrop-filter: saturate(180%) blur(15px); /*뿌옇게 처리*/
 }
 .global-nav-links,
@@ -103,7 +108,7 @@ body.before-load {
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  text-shadow: 3px 4px 4px rgb(29, 29, 31);
+  text-shadow: 3px 4px 4px rgb(45, 45, 45);
 }
 .main-message small{
   display: block; /*다음 글자가 다음단락으로 넘어감*/
@@ -156,7 +161,7 @@ body.before-load {
 }
 .canvas-caption{
   max-width: 1000px;
-  margin: -8em auto 0;
+  margin: -24rem auto 0; /*모바일용 문단 높이*/
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
@@ -180,6 +185,7 @@ body.before-load {
 #show-scene-2 #scroll-section-2 .sticky-elem,
 #show-scene-3 #scroll-section-3 .sticky-elem{ 
   display: block;
+  will-change: transform, opacity; /*메모리 사용량 증가(퍼포먼스 향상 효과)*/
 }
 .sticky-elem-canvas{
   top: 0;
