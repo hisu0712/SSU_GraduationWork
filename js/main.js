@@ -127,7 +127,7 @@
       values: {
         rect1X: [ 0, 0, { start: 0, end: 0 }],
         rect2X: [ 0, 0, { start: 0, end: 0 }],
-        blendHeiheesught: [ 0, 0, { start: 0, end: 0 }],
+        blendHeight: [ 0, 0, { start: 0, end: 0 }],
         canvas_scale: [ 0, 0, { start: 0, end: 0 }],
         canvasCaption_opacity: [ 0, 1, { start: 0, end: 0 }],
         canvasCaption_translateY: [ 20, 0, { start: 0, end: 0 }],
