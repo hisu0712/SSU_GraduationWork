@@ -75,7 +75,6 @@ a, button, input, select {
 	height: 100vh;
 	display: flex; /*교체 none-flex*/
 	flex-direction: column;
-	position: fixed;
 }
 
 .arButton{
