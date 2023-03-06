@@ -6,6 +6,7 @@ body {
 	font-size: 16px;
 	line-height: 24px;
 	overscroll-behavior: none;
+	overflow-y: hidden;
 }
 
 a {
@@ -38,37 +39,32 @@ a, button, input, select {
 	top: 0;
 	left: 0;
 	background-color: #111;
-	overflow-x: hidden;
 	transition: 0.5s;
-	padding-top: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: auto;
 }
 
-.sidenav a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
-	display: block;
-	transition: 0.3s;
+.sidenav::-webkit-scrollbar{
+	display: none;
 }
 
-.sidenav a:hover {
-	color: #f1f1f1;
+.ar-object{
+	height: 200px;
+	width: 200px;
+	margin-top: 20px;
+	border-radius: 10px;
 }
-
-.sidenav .closebtn {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
+.ar-object:last-child{
+	margin-bottom: 20px;
 }
 
 #AR{
 	margin: 200px auto;
 	height: 300px;
 	width: 300px;
-	display: grid; /*교체 grid-none*/
+	display: none; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
 	grid-gap: 1rem;
 	align-items: center;
@@ -77,8 +73,9 @@ a, button, input, select {
 
 #main{
 	height: 100vh;
-	display: none; /*교체 none-flex*/
+	display: flex; /*교체 none-flex*/
 	flex-direction: column;
+	position: fixed;
 }
 
 .arButton{
@@ -90,6 +87,7 @@ a, button, input, select {
 	width: 150px;
 	margin: 0 auto;
 }
+
 #topSection{
 	flex: 1;
 	position: relative;
@@ -135,8 +133,7 @@ a, button, input, select {
 	align-items: center;
 	width: 100%;
 	overflow-x: auto;
-	scrollbar-width: none;
-  	-ms-overflow-style: none;
+	padding-right: 20px;
 }
 
 .buttons::-webkit-scrollbar{
@@ -153,10 +150,6 @@ a, button, input, select {
 	background-color: rgba(255, 255, 255, 0.3);
 	margin-left: 20px;
 	border-radius: 10px;
-}
-
-.modelSelect:last-child{
-	margin-right: 20px;
 }
 
 .modelSelect img{

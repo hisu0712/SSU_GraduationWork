@@ -6,10 +6,13 @@ let scene, camera, raycaster, renderer, session;
 let loader;
 let reticle, objBox;
 
-const models = [['golf', 'nike', 'padding', 'pilates'],['backpack'],['ballet'],['bikini']];
+const models = [['golf', 'nike', 'padding', 'pilates','backpack','ballet','bikini'],
+                ['sofa1,', 'sofa2', 'carpet'],
+                ['eiffel', 'croissant', 'car'],
+                []];
 const modelExist = {};
 const modelColor = {};
-let menuSelected = null;
+let menuSelected = 0; //null
 let selected = null;
 let cameraMode = false;
 let btnClicked = null;
@@ -249,7 +252,7 @@ document.getElementById("AR").addEventListener('click', (e)=>{
 });
 
 document.getElementById("button-menu").addEventListener('click', ()=>{
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "240px";
     menuOpened = true;
 });
 
@@ -262,8 +265,8 @@ document.getElementById("button-photo").addEventListener('click', ()=>{
     }
 });
 
-document.getElementById("mySidenav").addEventListener('touchstart', (e)=>{
-    const click = e.target;
+document.getElementById("mySidenav").addEventListener('click', (e)=>{
+    let click = e.target;
     while(!click.classList.contains('ar-object')){
         click = click.parentNode;
         if(click.nodeName == 'BODY'){
@@ -284,9 +287,8 @@ document.getElementById("mySidenav").addEventListener('touchstart', (e)=>{
 
 document.getElementById("main").addEventListener('touchstart', (e)=>{
     if(menuOpened){
-        const click = e.target;
-        if(!(click.classList.contains('sidenav') || click.classList.contains('ar-object')) ||
-        click.classList.contains('closebtn')){
+        let click = e.target;
+        if(!(click.classList.contains('sidenav') || click.classList.contains('ar-object'))){
             document.getElementById("mySidenav").style.width = "0";
             menuOpened = false;
         }
