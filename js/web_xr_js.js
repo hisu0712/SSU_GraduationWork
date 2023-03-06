@@ -7,7 +7,7 @@ let loader;
 let reticle, objBox;
 
 const models = [['golf', 'nike', 'padding', 'pilates','backpack','ballet','bikini'],
-                ['sofa1,', 'sofa2', 'carpet'],
+                ['sofa1', 'sofa2', 'carpet'],
                 ['eiffel', 'croissant', 'car'],
                 []];
 const modelExist = {};
