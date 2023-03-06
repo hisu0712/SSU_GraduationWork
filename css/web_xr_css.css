@@ -64,7 +64,7 @@ a, button, input, select {
 	margin: 200px auto;
 	height: 300px;
 	width: 300px;
-	display: none; /*교체 grid-none*/
+	display: grid; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
 	grid-gap: 1rem;
 	align-items: center;
@@ -73,7 +73,7 @@ a, button, input, select {
 
 #main{
 	height: 100vh;
-	display: flex; /*교체 none-flex*/
+	display: none; /*교체 none-flex*/
 	flex-direction: column;
 }
 
