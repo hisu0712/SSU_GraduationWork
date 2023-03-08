@@ -31,9 +31,6 @@ a{
 	height: 52px;
 	padding: 0 1rem; /*border-box가 있어야 오른쪽 패딩 적용됨*/
 	border-bottom: 1px solid var(--apple_black);
-	background: rgba(255, 255, 255, 0.1);
-	-webkit-backdrop-filter: saturate(180%) blur(15px); 
-	backdrop-filter: saturate(180%) blur(15px); 
 }
 .local-nav-links{
 	display: flex;
@@ -99,7 +96,7 @@ a, button, input, select {
 	width: max-content;
 	display: grid; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
-	grid-gap: 1rem 0.7rem;
+	grid-gap: 1rem 0.65rem;
 	align-items: center;
 	justify-content: center;
 }
@@ -124,19 +121,19 @@ a, button, input, select {
 	opacity: 0.7;
 }
 .arButton.london{
-	background: url("../image/web_xr_image/3.jpg") no-repeat;
+	background: url("../image/web_xr_image/london.png") no-repeat;
 	background-size: contain;
 }
 .arButton.paris{
-	background: url("../image/web_xr_image/4.jpg") no-repeat;
+	background: url("../image/web_xr_image/paris.png") no-repeat;
 	background-size: contain;
 }
 .arButton.italy{
-	background: url("../image/web_xr_image/2.jpg") no-repeat ;
+	background: url("../image/web_xr_image/roma.png") no-repeat ;
 	background-size: contain;
 }
 .arButton.praha{
-	background: url("../image/web_xr_image/1.jpg") no-repeat;
+	background: url("../image/web_xr_image/prague.png") no-repeat;
 	background-size: contain;
 }
 
