@@ -111,9 +111,11 @@ a, button, input, select {
 	flex-direction: column;
 }
 .arButton{
-	background-size: cover;
 	color: var(--white);
+	font-size: 0;
+	/*
 	font-size: 1.4rem;
+	*/
 	font-weight: bold;
 	display: flex;
 	justify-content: center;
@@ -128,7 +130,20 @@ a, button, input, select {
 	opacity: 0.7;
 }
 .arButton.london{
+	background: url("../image/web_xr_image/3.jpg") no-repeat center center;
+	background-size: contain;
+}
+.arButton.paris{
+	background: url("../image/web_xr_image/4.jpg") no-repeat center center;
+	background-size: contain;
+}
+.arButton.italy{
+	background: url("../image/web_xr_image/2.jpg") no-repeat center center;
+	background-size: contain;
+}
+.arButton.praha{
 	background: url("../image/web_xr_image/1.jpg") no-repeat center center;
+	background-size: contain;
 }
 
 #topSection{
