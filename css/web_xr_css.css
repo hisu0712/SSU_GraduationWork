@@ -1,38 +1,74 @@
+:root{
+	--apple_black: rgb(29, 29, 31);
+	--apple_white: #ddd;
+	--apple_grey: #888;
+	--yellow: #e9dd2b;
+	--black: #000;
+	--white: #fff;
+}
+html{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+}
 body {
 	margin: 0;
-	background-color: #000;
-	color: #fff;
-	font-family: Monospace;
-	font-size: 16px;
-	line-height: 24px;
+	padding: 0;
+	background-color: var(--white);
+	letter-spacing: -0.05em;
 	overscroll-behavior: none;
 	overflow: hidden;
 	height: 100%;
 }
 body * { touch-action: none; }
 
-a {
-	color: #ff0;
+/*메뉴바 관련*/
+a{
+	color: var(--apple_black);
 	text-decoration: none;
 }
-
-a:hover {
-	text-decoration: underline;
+.local-nav{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 52px;
+	padding: 0 1rem; /*border-box가 있어야 오른쪽 패딩 적용됨*/
+	border-bottom: 1px solid var(--apple_black);
+	background: rgba(255, 255, 255, 0.1);
+	-webkit-backdrop-filter: saturate(180%) blur(15px); 
+	backdrop-filter: saturate(180%) blur(15px); 
+}
+.local-nav-links{
+	display: flex;
+	align-items: center;
+	max-width: 1000px;
+	height: 100%;
+	margin: 0 auto;
+}
+.local-nav-links .product-name{
+	margin-right: auto;
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: var(--apple_black);
+}
+.local-nav-links a{
+	font-size: 0.8rem;
+	color: var(--apple_black);
+}
+.local-nav-links a:not(.product-name){
+	margin-left: 2em;
 }
 
 button {
 	cursor: pointer;
 	text-transform: uppercase;
 }
-
 canvas {
 	display: block;
 }
-
 a, button, input, select {
 	pointer-events: auto;
 }
-
 .sidenav {
 	height: 100%;
 	width: 0;
@@ -47,11 +83,9 @@ a, button, input, select {
 	align-items: center;
 	overflow-y: auto;
 }
-
 .sidenav::-webkit-scrollbar{
 	display: none;
 }
-
 .ar-object{
 	height: 200px;
 	width: 200px;
@@ -61,41 +95,45 @@ a, button, input, select {
 .ar-object:last-child{
 	margin-bottom: 20px;
 }
-
 #AR{
 	margin: 200px auto;
-	height: 300px;
-	width: 300px;
+	height: max-content;
+	width: max-content;
 	display: grid; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
 	grid-gap: 1rem;
 	align-items: center;
 	justify-content: center;
 }
-
 #main{
 	height: 100vh;
 	display: none; /*교체 none-flex*/
 	flex-direction: column;
 }
-
 .arButton{
-	background-color: blue;
+	background: url("../image/web_xr_image/5877.jpg") no-repeat center center;
+	background-size: cover;
+	color: var(--white);
+	font-size: 1.4rem;
+	font-weight: bold;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 150px;
-	width: 150px;
+	height: 200px;
+	width: 200px;
 	margin: 0 auto;
+	border: 0.5rem solid var(--apple_white);
 }
-
+/*hover*/
+.arButton:hover{
+	opacity: 0.7;
+}
 #topSection{
 	flex: 1;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 }
-
 #bottomSection{
 	background: url("../image/web_xr_image/background_paris.jpg") no-repeat center center;
 	background-size: cover;
@@ -104,19 +142,16 @@ a, button, input, select {
 	flex-direction: row;
 	transition: 0.5s;
 }
-
 .delete-icons{
 	display: flex;
 	justify-content: center;
 }
-
 #delete{
 	position: absolute;
 	bottom: 10px;
 	width: 0px;
 	transition: 0.3s;
 }
-
 .icon-buttons{
 	display: flex;
 	justify-content: space-between;
@@ -124,11 +159,9 @@ a, button, input, select {
 	transition: 0.5s;
 	padding: 0 20px;
 }
-
 .iconSelect{
 	width: 35px;
 }
-
 .buttons{
 	display: flex;
 	align-items: center;
@@ -136,11 +169,9 @@ a, button, input, select {
 	overflow-x: auto;
 	padding-right: 20px;
 }
-
 .buttons::-webkit-scrollbar{
 	display: none;
 }
-
 .modelSelect{
 	display: none;
 	justify-content: center;
@@ -152,12 +183,10 @@ a, button, input, select {
 	margin-left: 20px;
 	border-radius: 10px;
 }
-
 .modelSelect img{
 	width: 100px;
 	height: 100px;
 }
-
 .dot{
 	width: 200px;
 	height: 200px;

@@ -2,17 +2,28 @@
 <html lang="en">
 
 <head>
-   <title>3D Model</title>
-   <meta charset="utf-8">
-   
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-   <link type="text/css" rel="stylesheet" href="./css/web_xr_css.css">
+    <title>3D Model</title>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/default.css"> <!--순서에따라css우선순위있음-->
+    <link type="text/css" rel="stylesheet" href="./css/web_xr_css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/three@0.133.0/build/three.js" crossorigin="anonymous"></script>
-     <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 </head>
 
 <body>
+    <nav class="local-nav">
+        <div class="local-nav-links">
+            <a href="index.html" class="product-name">AR PHOTO</a>
+            <a href="web_xr.html">웹AR</a>
+            <a href="#">포토후기</a>
+        </div>
+    </nav>
     <div id="console-ui"></div>
     <div id="AR">
         <div class="arButton" id="0" data-value="0">Westmoon</div>
@@ -27,7 +38,7 @@
             <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="2" href="#">
             <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="3" href="#">
         </div>
-        <container class="container touchScreen" id="topSection">
+        <section class="container touchScreen" id="topSection">
             <div class="icon-buttons" id="icon-buttons">
                 <img class="iconSelect" src="./image/web_xr_image/icon_menu.png" id="button-menu">
                 <img class="iconSelect" src="./image/web_xr_image/icon_camera.png" id="button-photo">
@@ -36,8 +47,8 @@
             <div class="delete-icons">
                 <img id="delete" src="./image/web_xr_image/delete.png">
             </div>
-        </container>
-        <container class="container" id="bottomSection">
+        </section>
+        <section class="container" id="bottomSection">
             <div class="buttons" id="buttons">
                 <div class="modelSelect" id="golf" data-value="golf">
                     <img src="./image/web_xr_image/golf.png"></div>
@@ -67,8 +78,7 @@
                     <img src="./image/web_xr_image/croissant.png"></div>
                 <div class="modelSelect" id="car" data-value="car">
                     <img src="./image/web_xr_image/car.png"></div>
-
-        </container>
+            </section>
     </div>
    <script type="module" src="./js/web_xr_js.js"></script>
 </body>
