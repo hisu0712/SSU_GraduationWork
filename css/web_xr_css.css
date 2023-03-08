@@ -27,9 +27,6 @@ a{
 	text-decoration: none;
 }
 .local-nav{
-	position: fixed;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 52px;
 	padding: 0 1rem; /*border-box가 있어야 오른쪽 패딩 적용됨*/
@@ -96,12 +93,13 @@ a, button, input, select {
 	margin-bottom: 20px;
 }
 #AR{
-	margin: 200px auto;
+	padding-top: 140px;
+	margin: 0 auto;
 	height: max-content;
 	width: max-content;
 	display: grid; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
-	grid-gap: 1rem;
+	grid-gap: 1rem 0.7rem;
 	align-items: center;
 	justify-content: center;
 }
@@ -117,12 +115,8 @@ a, button, input, select {
 	font-size: 1.4rem;
 	*/
 	font-weight: bold;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	height: 200px;
 	width: 200px;
-	margin: 0 auto;
 	border: 0.5rem solid var(--apple_white);
 }
 /*hover*/
@@ -130,19 +124,19 @@ a, button, input, select {
 	opacity: 0.7;
 }
 .arButton.london{
-	background: url("../image/web_xr_image/3.jpg") no-repeat center center;
+	background: url("../image/web_xr_image/3.jpg") no-repeat;
 	background-size: contain;
 }
 .arButton.paris{
-	background: url("../image/web_xr_image/4.jpg") no-repeat center center;
+	background: url("../image/web_xr_image/4.jpg") no-repeat;
 	background-size: contain;
 }
 .arButton.italy{
-	background: url("../image/web_xr_image/2.jpg") no-repeat center center;
+	background: url("../image/web_xr_image/2.jpg") no-repeat ;
 	background-size: contain;
 }
 .arButton.praha{
-	background: url("../image/web_xr_image/1.jpg") no-repeat center center;
+	background: url("../image/web_xr_image/1.jpg") no-repeat;
 	background-size: contain;
 }
 
@@ -211,4 +205,8 @@ a, button, input, select {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	background-size: contain;
+}
+
+@media (min-width: 600px){
+	/*모바일버전에서는 그리드 한줄 정렬*/
 }
