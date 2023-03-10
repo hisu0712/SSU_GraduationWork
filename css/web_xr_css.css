@@ -248,4 +248,8 @@ a, button, input, select {
   #AR{
      margin-left: 0;
   }
+	.local-nav{
+		/*나중에 고치기*/
+		display: none;
+	}
 }
