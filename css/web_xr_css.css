@@ -245,9 +245,14 @@ a, button, input, select {
      display: none;
   }
   #AR{
+		padding-top: 20px;
      margin-left: 0;
 		 grid-template-columns: unset;
   }
+	.arButton{
+		width: 225;
+		height: 180px;
+	}
 	.local-nav{
 		/*나중에 고치기*/
 		display: none;
