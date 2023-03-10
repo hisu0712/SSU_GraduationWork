@@ -146,29 +146,28 @@ a, button, input, select {
   font-weight: bold;
   height: 200px;
   width: 250px;
-  border: 6px solid var(--apple_white);
 }
 /*hover*/
 .arButton:hover{
 	opacity: 0.7;
 }
 .arButton.london{
-	background: url("../image/web_xr_image/london.png") no-repeat;
+	background: url("../image/web_xr_image/london2.png") no-repeat;
   background-size: cover;
   background-position: 50% 0%;
 }
 .arButton.paris{
-	background: url("../image/web_xr_image/paris.png") no-repeat;
+	background: url("../image/web_xr_image/paris2.png") no-repeat;
   background-size: cover;
   background-position: 50% 0%;
 }
 .arButton.italy{
-	background: url("../image/web_xr_image/roma.png") no-repeat ;
+	background: url("../image/web_xr_image/roma2.png") no-repeat ;
   background-size: cover;
   background-position: 50% 0%;
 }
 .arButton.praha{
-	background: url("../image/web_xr_image/prague.png") no-repeat;
+	background: url("../image/web_xr_image/praque2.png") no-repeat;
   background-size: cover;
   background-position: 50% 0%;
 }
@@ -247,6 +246,7 @@ a, button, input, select {
   }
   #AR{
      margin-left: 0;
+		 grid-template-columns: unset;
   }
 	.local-nav{
 		/*나중에 고치기*/
