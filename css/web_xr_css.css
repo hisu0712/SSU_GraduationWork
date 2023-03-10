@@ -89,32 +89,63 @@ a, button, input, select {
 .ar-object:last-child{
 	margin-bottom: 20px;
 }
+.ARSection{
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
 #AR{
 	padding-top: 140px;
-	margin: 0 auto;
 	height: max-content;
 	width: max-content;
 	display: grid; /*교체 grid-none*/
 	grid-template-columns: 50% 50%;
-	grid-gap: 1rem 0.65rem;
+	grid-gap: 1rem 0.7rem;
 	align-items: center;
 	justify-content: center;
+	margin-left: 70px;
 }
 #main{
 	height: 100vh;
 	display: none; /*교체 none-flex*/
 	flex-direction: column;
 }
+.ReadComent{
+	text-align: center;
+	font-size: 1rem;
+}
+.ReadComent h1{
+	font-size: 2.5rem;
+	letter-spacing: 0.2rem;
+	padding-top: 9rem;
+	padding-bottom: 0.3rem;
+	border-bottom: 1px solid var(--apple_grey);
+}
+.ReadComent p{
+	padding-top: 1.5rem;
+	padding-bottom: 2rem;   
+	color: var(--apple_grey);
+}
+.ReadComent span{
+	background-color: var(--apple_black);
+	border: 1px solid var(--black);
+	padding: 0.4rem 1.8rem;
+	font-size: 1.2rem;
+	border-radius: 0.2rem;
+	color: var(--apple_white);
+	letter-spacing: 0.03rem;
+}
 .arButton{
-	color: var(--white);
-	font-size: 0;
-	/*
-	font-size: 1.4rem;
-	*/
-	font-weight: bold;
-	height: 200px;
-	width: 200px;
-	border: 0.5rem solid var(--apple_white);
+  color: var(--white);
+  font-size: 0;
+  /*
+  font-size: 1.4rem;
+  */
+  font-weight: bold;
+  height: 200px;
+  width: 250px;
+  border: 0.5rem solid var(--apple_white);
 }
 /*hover*/
 .arButton:hover{
@@ -122,19 +153,23 @@ a, button, input, select {
 }
 .arButton.london{
 	background: url("../image/web_xr_image/london.png") no-repeat;
-	background-size: contain;
+  background-size: cover;
+  background-position: 50% 60%;
 }
 .arButton.paris{
 	background: url("../image/web_xr_image/paris.png") no-repeat;
-	background-size: contain;
+  background-size: cover;
+  background-position: 50% 60%;
 }
 .arButton.italy{
 	background: url("../image/web_xr_image/roma.png") no-repeat ;
-	background-size: contain;
+  background-size: cover;
+  background-position: 50% 60%;
 }
 .arButton.praha{
 	background: url("../image/web_xr_image/prague.png") no-repeat;
-	background-size: contain;
+  background-size: cover;
+  background-position: 50% 60%;
 }
 
 #topSection{
@@ -204,6 +239,12 @@ a, button, input, select {
 	background-size: contain;
 }
 
-@media (min-width: 600px){
-	/*모바일버전에서는 그리드 한줄 정렬*/
+@media (max-width: 790px){
+  /*모바일버전에서는 그리드 한줄 정렬*/
+  .ReadComent{
+     display: none;
+  }
+  #AR{
+     margin-left: 0;
+  }
 }

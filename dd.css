@@ -1,0 +1,251 @@
+:root{
+  --apple_black: rgb(29, 29, 31);
+  --apple_white: #ddd;
+  --apple_grey: #888;
+  --yellow: #e9dd2b;
+  --black: #000;
+  --white: #fff;
+}
+html{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--white);
+  letter-spacing: -0.05em;
+  overscroll-behavior: none;
+  overflow-y: hidden;
+  height: 100%;
+}
+body * { touch-action: none; }
+
+/*메뉴바 관련*/
+a{
+  color: var(--apple_black);
+  text-decoration: none;
+}
+.local-nav{
+  width: 100%;
+  height: 52px;
+  padding: 0 1rem; /*border-box가 있어야 오른쪽 패딩 적용됨*/
+  border-bottom: 1px solid var(--apple_black);
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: saturate(180%) blur(15px); 
+  backdrop-filter: saturate(180%) blur(15px); 
+}
+.local-nav-links{
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+}
+.local-nav-links .product-name{
+  margin-right: auto;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--apple_black);
+}
+.local-nav-links a{
+  font-size: 0.8rem;
+  color: var(--apple_black);
+}
+.local-nav-links a:not(.product-name){
+  margin-left: 2em;
+}
+
+button {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+canvas {
+  display: block;
+}
+a, button, input, select {
+  pointer-events: auto;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+.sidenav::-webkit-scrollbar{
+  display: none;
+}
+.ar-object{
+  height: 200px;
+  width: 200px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.ar-object:last-child{
+  margin-bottom: 20px;
+}
+.ARSection{
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+#AR{
+  padding-top: 140px;
+  height: max-content;
+  width: max-content;
+  display: grid; /*교체 grid-none*/
+  grid-template-columns: 50% 50%;
+  grid-gap: 1rem 0.7rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: 70px;
+}
+#main{
+  height: 100vh;
+  display: none; /*교체 none-flex*/
+  flex-direction: column;
+}
+.ReadComent{
+  text-align: center;
+  font-size: 1rem;
+}
+.ReadComent h1{
+  font-size: 2.5rem;
+  letter-spacing: 0.2rem;
+  padding-top: 70px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--apple_grey);
+}
+.ReadComent p{
+  padding-top: 10px;
+  padding-bottom: 30px;   
+  color: var(--apple_grey);
+}
+.ReadComent span{
+  background-color: var(--apple_black);
+  border: 1px solid var(--black);
+  padding: 0.5rem 1.8rem;
+  font-size: 1.4rem;
+  color: var(--apple_white);
+}
+.arButton{
+  color: var(--white);
+  font-size: 0;
+  /*
+  font-size: 1.4rem;
+  */
+  font-weight: bold;
+  height: 200px;
+  width: 250px;
+  border: 0.5rem solid var(--apple_white);
+}
+/*hover*/
+.arButton:hover{
+  opacity: 0.7;
+}
+.arButton.london{
+  background: url("../image/web_xr_image/3.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50% 60%;
+}
+.arButton.paris{
+  background: url("../image/web_xr_image/4.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50% 60%;
+}
+.arButton.italy{
+  background: url("../image/web_xr_image/2.jpg") no-repeat ;
+  background-size: cover;
+  background-position: 50% 60%;
+}
+.arButton.praha{
+  background: url("../image/web_xr_image/1.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50% 60%;
+}
+
+#topSection{
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#bottomSection{
+  background: url("../image/web_xr_image/background_paris.jpg") no-repeat center center;
+  background-size: cover;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  transition: 0.5s;
+}
+.delete-icons{
+  display: flex;
+  justify-content: center;
+}
+#delete{
+  position: absolute;
+  bottom: 10px;
+  width: 0px;
+  transition: 0.3s;
+}
+.icon-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  transition: 0.5s;
+  padding: 0 20px;
+}
+.iconSelect{
+  width: 35px;
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  padding-right: 20px;
+}
+.buttons::-webkit-scrollbar{
+  display: none;
+}
+.modelSelect{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: 20px;
+  border-radius: 10px;
+}
+.modelSelect img{
+  width: 100px;
+  height: 100px;
+}
+.dot{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-size: contain;
+}
+
+@media (max-width: 790px){
+  /*모바일버전에서는 그리드 한줄 정렬*/
+  .ReadComent{
+     display: none;
+  }
+  #AR{
+     margin-left: 0;
+  }
+}
