@@ -8,10 +8,9 @@ let reticle, objBox;
 
 const models = [['golf', 'nike', 'padding', 'pilates','backpack','ballet','bikini'],
                 ['sofa1', 'sofa2', 'carpet'],
-                ['eiffel', 'croissant', 'car'],
+                ['eiffel', 'croissant', 'bus'],
                 []];
 const modelExist = {};
-const modelColor = {};
 let menuSelected = 0; //null
 let selected = null;
 let cameraMode = false;
@@ -62,10 +61,10 @@ function init() {
     renderer.xr.enabled = true; // we have to enable the renderer for webxr
     container.appendChild(renderer.domElement);
 
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x808080, 1);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
     scene.add(hemiLight);
 
-    const ambiLight = new THREE.AmbientLight(0xffffff);
+    const ambiLight = new THREE.AmbientLight(0x404040);
     scene.add(ambiLight);
 
     loader = new THREE.GLTFLoader();
@@ -108,9 +107,6 @@ function loadGLBFile(select, reti){
                         THREE.MeshBasicMaterial.prototype.copy.call(child.material, prevMaterial);
                     }
                 });
-                
-                if (modelColor[select] === undefined)
-                    modelColor[select] = glb.scene.children[0].material.color.clone();
 
                 modelAppear(select);
 
@@ -162,7 +158,6 @@ async function initializeHitTestSource(){
         
         for(let model of Object.keys(modelExist)){
             scene.remove(modelExist[model]);
-            delete modelColor[model];
             delete modelExist[model];
         }
     });
@@ -222,7 +217,6 @@ function modelDisappear(selected){
         if(i<=0){
             scene.remove(modelExist[selected]);
             delete modelExist[selected];
-            delete modelColor[selected];
             selected = null;
             clearInterval(disappear);
             return;
@@ -366,22 +360,29 @@ touchScreen.addEventListener('touchstart', e=>{
             raycaster.far = 1000;
             pointer.x = (touchX1/window.innerWidth) * 2 - 1;
             pointer.y = -(touchY1/window.innerHeight) * 2 + 1;
-            raycaster.setFromCamera(pointer, camera);  
+            console.log(pointer);
+            raycaster.setFromCamera(pointer, camera);
             if(Object.keys(modelExist).length > 0){
                 const intersectsArray = raycaster.intersectObjects(Object.values(modelExist));
                 if(intersectsArray.length > 0){
-                    selected = intersectsArray[0].object.name;
-                    modelExist[selected].children[0].material.color.copy(modelColor[selected]);
-                    modelExist[selected].children[0].material.color.offsetHSL(0, 0, -0.5);
-
+                    selected = intersectsArray[0].object.name.split('_')[0];
+                    /*
+                    let originScale = modelExist[selected].scale.x;
+                    let touchScale = originScale;
+                    let t = -0.01;
+                    
                     const modelTouch = setInterval(()=>{
-                        modelExist[selected].children[0].material.color.offsetHSL(0, 0, 0.01);
-                        if(modelExist[selected].children[0].material.color.getHSL(new THREE.Color).l >= modelColor[selected].getHSL(new THREE.Color).l){
-                            modelExist[selected].children[0].material.color.copy(modelColor[selected]);
+                        touchScale += t;
+                        modelExist[selected].scale.set(touchScale, touchScale, touchScale);
+                        if(touchScale <= originScale - 0.3){
+                            t = 0.01;
+                        }
+                        if(touchScale >= originScale){
+                            modelExist[selected].scale.set(originScale, originScale, originScale);
                             clearInterval(modelTouch);
                             return;
                         }
-                    }, 10);
+                    }, 10);*/
                 }
             }
         }

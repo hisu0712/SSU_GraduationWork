@@ -19,7 +19,7 @@ body {
 	overflow: hidden;
 	height: 100%;
 }
-body * { touch-action: none; }
+body * { touch-action: pan-x; }
 
 /*메뉴바 관련*/
 a{
@@ -145,7 +145,7 @@ a, button, input, select {
   font-weight: bold;
   height: 200px;
   width: 250px;
-  border: 0.5rem solid var(--apple_white);
+  border: 6px solid var(--apple_white);
 }
 /*hover*/
 .arButton:hover{
@@ -154,22 +154,22 @@ a, button, input, select {
 .arButton.london{
 	background: url("../image/web_xr_image/london.png") no-repeat;
   background-size: cover;
-  background-position: 50% 60%;
+  background-position: 50% 0%;
 }
 .arButton.paris{
 	background: url("../image/web_xr_image/paris.png") no-repeat;
   background-size: cover;
-  background-position: 50% 60%;
+  background-position: 50% 0%;
 }
 .arButton.italy{
 	background: url("../image/web_xr_image/roma.png") no-repeat ;
   background-size: cover;
-  background-position: 50% 60%;
+  background-position: 50% 0%;
 }
 .arButton.praha{
 	background: url("../image/web_xr_image/prague.png") no-repeat;
   background-size: cover;
-  background-position: 50% 60%;
+  background-position: 50% 0%;
 }
 
 #topSection{
