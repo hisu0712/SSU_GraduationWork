@@ -79,12 +79,12 @@
         videoImages: []
       },
       values: {
-        videoImagesCount: 960,
-        imageSequence: [0, 959],
-        canvas_opacity_in: [0, 1, { start:0, end: 0.1 }],
-        canvas_opacity_out: [1, 0, { start:0.95, end: 1 }],
+        videoImagesCount: 860,
+        imageSequence: [0, 859],
+        canvas_opacity_in: [0, 1, { start: 0, end: 0.1 }],
+        canvas_opacity_out: [1, 0, { start: 0.9, end: 1 }],
 
-        messageA_translateY_in: [20, 0, { start:0.15, end: 0.2 }],
+        /*messageA_translateY_in: [20, 0, { start:0.15, end: 0.2 }],
         messageB_translateY_in: [30, 0, { start:0.6, end: 0.65 }],
         messageC_translateY_in: [30, 0, { start:0.87, end: 0.92 }],
         
@@ -98,13 +98,25 @@
 
         messageA_opacity_out: [1, 0, { start: 0.4, end: 0.45 }],
         messageB_opacity_out: [1, 0, { start: 0.68, end: 0.73 }],
-        messageC_opacity_out: [1, 0, { start:0.95, end: 1 }],
+        messageC_opacity_out: [1, 0, { start:0.9, end: 1 }],
+        */
+        messageB_translateY_in: [30, 0, { start:0.3, end: 0.35 }],
+        messageC_translateY_in: [30, 0, { start:0.87, end: 0.92 }],
+        
+        messageB_opacity_in: [0, 1, { start: 0.3, end: 0.35 }],
+        messageC_opacity_in: [0, 1, { start:0.87, end: 0.92 }],
 
-        pinB_scaleY: [0.5, 1, { start: 0.6, end: 0.65}],
+        messageB_translateY_out: [0, -20, { start: 0.38, end: 0.43 }],
+        messageC_translateY_out: [0, -20, { start: 0.95, end: 1 }],
+
+        messageB_opacity_out: [1, 0, { start: 0.38, end: 0.43 }],
+        messageC_opacity_out: [1, 0, { start:0.9, end: 1 }],
+
+        pinB_scaleY: [0.5, 1, { start: 0.3, end: 0.35}],
         pinC_scaleY: [0.5, 1, { start: 0.87, end: 0.92}],
-        pinB_opacity_in: [0, 1, { start: 0.6, end: 0.65 }],
+        pinB_opacity_in: [0, 1, { start: 0.3, end: 0.35 }],
         pinC_opacity_in: [0, 1, { start: 0.87, end: 0.92 }],
-        pinB_translateY_out: [1, 0, { start: 0.68, end: 0.73}],
+        pinB_translateY_out: [1, 0, { start: 0.38, end: 0.43}],
         pinC_translateY_out: [1, 0, { start: 0.95, end: 1}]
       }
     },
@@ -119,7 +131,7 @@
         canvas: document.querySelector('.image-blend-canvas'),
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
         ImagesPath: [
-          './image/blend-image-1.jpg',
+          './image/blend-image-1.png',
           './image/blend-image-2.jpg'
         ],
         images: []
@@ -148,7 +160,7 @@
     let imgElem2;
     for (let i=0; i < sceneInfo[2].values.videoImagesCount; i++){
       imgElem = new Image();
-      imgElem.src = `./image/002/IMG_${7027 + i}.JPG`
+      imgElem.src = `./image/vid3_min/vid3_${36 + i}.jpg`
       sceneInfo[2].objs.videoImages.push(imgElem);
     }
 

@@ -145,19 +145,22 @@ body.before-load {
 	width: 45%;
 	font-weight: bold;
 	opacity: 0;
+  /*임시 폰트 꾸미기*/
+  color: var(--apple_white);
+  text-shadow: 3px 2px 2px rgb(45, 45, 45);
 }
 .pin{
   width: 1px;
   height: 100px;
-  background-color: var(--apple_black);
+  background-color: var(--apple_white);
 }
 #scroll-section-2 .b{
   top: 10%;
-  left: 40%;
+  left: 45%;
 }
 #scroll-section-2 .c{
   top: 15%;
-  left: 45%;
+  left: 25%;
 }
 .mid-message{
   max-width: 1000px;
@@ -291,7 +294,7 @@ body.before-load {
 	}
   #scroll-section-2 .b{
     top: 20%;
-    left: 53%;
+    left: 63%;
   }
   #scroll-section-2 .c{
     left: 55%;
