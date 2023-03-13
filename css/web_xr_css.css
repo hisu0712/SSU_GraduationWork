@@ -241,6 +241,9 @@ a, button, input, select {
 
 @media (max-width: 790px){
   /*모바일버전에서는 그리드 한줄 정렬*/
+	.local-nav{
+		display: none;
+	}
   .ReadComent{
      display: none;
   }
@@ -252,9 +255,5 @@ a, button, input, select {
 	.arButton{
 		width: 225;
 		height: 180px;
-	}
-	.local-nav{
-		/*나중에 고치기*/
-		display: none;
 	}
 }

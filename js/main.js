@@ -84,40 +84,28 @@
         canvas_opacity_in: [0, 1, { start: 0, end: 0.1 }],
         canvas_opacity_out: [1, 0, { start: 0.9, end: 1 }],
 
-        /*messageA_translateY_in: [20, 0, { start:0.15, end: 0.2 }],
-        messageB_translateY_in: [30, 0, { start:0.6, end: 0.65 }],
-        messageC_translateY_in: [30, 0, { start:0.87, end: 0.92 }],
+        messageA_translateY_in: [20, 0, { start: 0.15, end: 0.2 }],
+				messageB_translateY_in: [30, 0, { start: 0.5, end: 0.55 }],
+				messageC_translateY_in: [30, 0, { start: 0.72, end: 0.77 }],
+
+				messageA_opacity_in: [0, 1, { start: 0.15, end: 0.2 }],
+				messageB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
+				messageC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
+
+				messageA_translateY_out: [0, -20, { start: 0.3, end: 0.35 }],
+				messageB_translateY_out: [0, -20, { start: 0.58, end: 0.63 }],
+				messageC_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
         
-        messageA_opacity_in: [0, 1, { start: 0.25, end: 0.3 }],
-        messageB_opacity_in: [0, 1, { start: 0.6, end: 0.65 }],
-        messageC_opacity_in: [0, 1, { start:0.87, end: 0.92 }],
-
-        messageA_translateY_out: [0, -20, { start: 0.4, end: 0.45 }],
-        messageB_translateY_out: [0, -20, { start: 0.68, end: 0.73 }],
-        messageC_translateY_out: [0, -20, { start: 0.95, end: 1 }],
-
-        messageA_opacity_out: [1, 0, { start: 0.4, end: 0.45 }],
-        messageB_opacity_out: [1, 0, { start: 0.68, end: 0.73 }],
-        messageC_opacity_out: [1, 0, { start:0.9, end: 1 }],
-        */
-        messageB_translateY_in: [30, 0, { start:0.3, end: 0.35 }],
-        messageC_translateY_in: [30, 0, { start:0.87, end: 0.92 }],
+				messageA_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
+				messageB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
+				messageC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
         
-        messageB_opacity_in: [0, 1, { start: 0.3, end: 0.35 }],
-        messageC_opacity_in: [0, 1, { start:0.87, end: 0.92 }],
-
-        messageB_translateY_out: [0, -20, { start: 0.38, end: 0.43 }],
-        messageC_translateY_out: [0, -20, { start: 0.95, end: 1 }],
-
-        messageB_opacity_out: [1, 0, { start: 0.38, end: 0.43 }],
-        messageC_opacity_out: [1, 0, { start:0.9, end: 1 }],
-
-        pinB_scaleY: [0.5, 1, { start: 0.3, end: 0.35}],
-        pinC_scaleY: [0.5, 1, { start: 0.87, end: 0.92}],
-        pinB_opacity_in: [0, 1, { start: 0.3, end: 0.35 }],
-        pinC_opacity_in: [0, 1, { start: 0.87, end: 0.92 }],
-        pinB_translateY_out: [1, 0, { start: 0.38, end: 0.43}],
-        pinC_translateY_out: [1, 0, { start: 0.95, end: 1}]
+				pinB_scaleY: [0.5, 1, { start: 0.5, end: 0.55 }],
+				pinC_scaleY: [0.5, 1, { start: 0.72, end: 0.77 }],
+				pinB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
+				pinC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
+				pinB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
+				pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }]
       }
     },
     {
