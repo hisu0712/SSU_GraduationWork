@@ -26,7 +26,7 @@ a{
 	color: var(--apple_black);
 	text-decoration: none;
 }
-.local-nav{
+#local-nav{
 	position: relative;
 	width: 100%;
 	height: 52px;
@@ -241,12 +241,6 @@ a, button, input, select {
 
 @media (max-width: 790px){
   /*모바일버전에서는 그리드 한줄 정렬*/
-	.local-nav{
-		display: none;
-	}
-  .ReadComent{
-     display: none;
-  }
   #AR{
 		padding-top: 20px;
   	margin-left: 0;

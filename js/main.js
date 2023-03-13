@@ -570,11 +570,9 @@
         /*if (window.innerWidth > 900){
           window.location.reload();
         }*/
-        // 3번 scene 제외하고는 제대로 동작
+        // 3번 scene 제외하고는 제대로 동작(한번 내려가는 것은 괜찮은데 올라오는 것이 문제)
         setLayout(); // 모바일에서는 리사이즈X
-        if (window.innerWidth > 900){
         sceneInfo[3].values.rectStartY = 0; // 리사이즈 대응
-        }
     }); //창을 세로로 줄일 때, 다시 높이 세팅
 
     window.addEventListener('orientationchange', () => {
