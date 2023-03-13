@@ -1,4 +1,4 @@
-setupMobileDebug();
+//setupMobileDebug();
 
 import { ARButton } from './ARButton.js';
 
