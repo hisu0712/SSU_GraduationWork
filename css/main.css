@@ -15,7 +15,7 @@ body{
   overflow-x: hidden;
   color: var(--apple_black);
   letter-spacing: -0.05em;
-  background: var(--black);
+  background: #151515;
 }
 p{
   line-height: 1.6;
@@ -87,9 +87,6 @@ body.before-load {
   padding-top: 50vh;
 }
 /*추가(밑의 두 세션)*/
-#scroll-section-0{
-  background-color: var(--black);
-}
 #scroll-section-2 .main-message{
   color: var(--black);
 }
@@ -170,7 +167,7 @@ body.before-load {
   color: var(--apple_grey);
 }
 .mid-message strong{
-  color: var(--apple_black);
+  color: var(--apple_white);
 }
 .canvas-caption{
   max-width: 1000px;
