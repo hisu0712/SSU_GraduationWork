@@ -341,7 +341,7 @@
           }
   
           objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
-          objs.context.fillStyle = 'black';
+          objs.context.fillStyle = '#151515';
           objs.context.drawImage(objs.images[0], 0, 0);
   
           /// 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight

@@ -1,3 +1,14 @@
+* {
+	-webkit-touch-callout: none;
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+
 :root{
 	--apple_black: rgb(29, 29, 31);
 	--apple_white: #ddd;
@@ -16,10 +27,10 @@ body {
 	background-color: var(--white);
 	letter-spacing: -0.05em;
 	overscroll-behavior: none;
-	overflow: hidden;
+	overflow-y: hidden;
 	height: 100%;
+	touch-action: none;
 }
-body * { touch-action: pan-x; }
 
 /*메뉴바 관련*/
 a{
@@ -76,7 +87,8 @@ a, button, input, select {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	overflow-y: auto;
+	overflow-y: scroll;
+	touch-action: pan-y;
 }
 .sidenav::-webkit-scrollbar{
 	display: none;
@@ -162,7 +174,7 @@ a, button, input, select {
   background-position: 50% 0%;
 }
 .arButton.italy{
-	background: url("../image/web_xr_image/roma2.png") no-repeat ;
+	background: url("../image/web_xr_image/rome2.png") no-repeat ;
   background-size: cover;
   background-position: 50% 0%;
 }
@@ -177,6 +189,7 @@ a, button, input, select {
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	touch-action: none;
 }
 #bottomSection{
 	background: url("../image/web_xr_image/background_paris.jpg") no-repeat center center;
@@ -212,6 +225,7 @@ a, button, input, select {
 	width: 100%;
 	overflow-x: auto;
 	padding-right: 20px;
+	touch-action: pan-x;
 }
 .buttons::-webkit-scrollbar{
 	display: none;
@@ -237,6 +251,31 @@ a, button, input, select {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	background-size: contain;
+}
+.arrow{
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	left: 50%;
+	bottom: 0px;
+	transform: translate(-50%, -50%);
+	background-size: contain;
+	animation: arrowAnimate 0.7s infinite linear;
+}
+@keyframes arrowAnimate{
+	0% {bottom: -10px; opacity: 0%;}
+	50% {bottom: 15px; opacity: 100%;}
+	100% {bottom: 40px; opacity: 0%;}
+}
+.circle {
+	position: absolute;
+	bottom: -70px;
+	left: calc(50% - 35px);
+	width: 70px;
+	height: 70px;
+	background: white;
+	border-radius: 50%;
+	transition: 0.5s;
 }
 
 @media (max-width: 790px){

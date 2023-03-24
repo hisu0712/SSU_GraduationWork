@@ -1,15 +1,16 @@
-//setupMobileDebug();
+setupMobileDebug();
 
 import { ARButton } from './ARButton.js';
 
 let scene, camera, raycaster, renderer, session;
-let loader;
-let reticle, objBox;
+let loader, dracoLoader, reticle, objBox;
+let threejsSceneImg = null;
 
-const models = [['golf', 'nike', 'padding', 'pilates','backpack','ballet','bikini'],
-                ['sofa1', 'sofa2', 'carpet'],
-                ['eiffel', 'croissant', 'bus'],
-                []];
+const models = [['bus', 'phonebox'], //London
+                ['eiffel', 'croissant', 'monalisa'], //Paris
+                ['colosseum', 'gelato', 'pizza'], //Rome
+                [], //Praque
+                ];
 const modelExist = {};
 let menuSelected = 0; //null
 let selected = null;
@@ -20,6 +21,7 @@ let menuOpened = false;
 
 const buttonUI1 = document.getElementById("icon-buttons");
 const buttonUI2 = document.getElementById("bottomSection");
+const camerabutton = document.getElementById("camera");
 const touchScreen = document.getElementById("topSection");
 const deleteButton = document.getElementById("delete");
 
@@ -31,6 +33,7 @@ let pressedTime = 0;
 
 init();
 animate();
+initRecording();
 
 function setupMobileDebug() {
     // First thing we do is setup the mobile debug console
@@ -55,7 +58,7 @@ function init() {
     raycaster = new THREE.Raycaster();
     raycaster.far = 0;
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true; // we have to enable the renderer for webxr
@@ -68,6 +71,9 @@ function init() {
     scene.add(ambiLight);
 
     loader = new THREE.GLTFLoader();
+    dracoLoader = new THREE.DRACOLoader();
+    dracoLoader.setDecoderPath('../draco/');
+    loader.setDRACOLoader(dracoLoader);
 
     addReticleToScene();
 
@@ -78,11 +84,24 @@ function init() {
 }
 
 function addReticleToScene(){
-    const geometry = new THREE.RingBufferGeometry(0.15, 0.2, 32).rotateX(-Math.PI / 2);
+    const ring1 = new THREE.RingBufferGeometry(0.19, 0.2, 32, 1, 0, Math.PI/2 - 0.1).rotateX(-Math.PI/2);
+    const ring2 = new THREE.RingBufferGeometry(0.19, 0.2, 32, 1, Math.PI/2, Math.PI/2 - 0.1).rotateX(-Math.PI/2);
+    const ring3 = new THREE.RingBufferGeometry(0.19, 0.2, 32, 1, Math.PI, Math.PI/2 - 0.1).rotateX(-Math.PI/2);
+    const ring4 = new THREE.RingBufferGeometry(0.19, 0.2, 32, 1, Math.PI*3/2, Math.PI/2 - 0.1).rotateX(-Math.PI/2);
+    const circle = new THREE.CircleGeometry(0.17, 32).rotateX(-Math.PI/2);
     const material = new THREE.MeshBasicMaterial();
+    const material2 = new THREE.MeshBasicMaterial();
+    material2.transparent = true;
+    material2.opacity = 0.3;
 
-    reticle = new THREE.Mesh(geometry, material);
+    const group = new THREE.Group();
+    group.add(new THREE.Mesh(ring1, material));
+    group.add(new THREE.Mesh(ring2, material));
+    group.add(new THREE.Mesh(ring3, material));
+    group.add(new THREE.Mesh(ring4, material));
+    group.add(new THREE.Mesh(circle, material2));
 
+    reticle = group;
     reticle.matrixAutoUpdate = false;
     reticle.visible = false;
     scene.add(reticle);
@@ -91,14 +110,14 @@ function addReticleToScene(){
 function loadGLBFile(select, reti){
     if(select in modelExist === false){
         loader.load(
-            `./image/glb/${select}.glb`,
+            `../image/glb/${select}.glb`,
             function (glb) {
                 glb.scene.position.setFromMatrixPosition(reti.matrix);
                 //glb.scene.quaternion.setFromRotationMatrix(reti.matrix);
                 glb.scene.scale.set(0,0,0);
                 scene.add(glb.scene);
                 modelExist[select] = glb.scene;
-
+                
                 glb.scene.traverse((child)=>{ //material 바꾸기
                     if(!child.isMesh) return;
                     else{
@@ -107,7 +126,7 @@ function loadGLBFile(select, reti){
                         THREE.MeshBasicMaterial.prototype.copy.call(child.material, prevMaterial);
                     }
                 });
-
+                
                 modelAppear(select);
 
                 if(objBox === undefined){ //objBox 한번만 소환해놓기
@@ -164,11 +183,12 @@ async function initializeHitTestSource(){
 }
 
 function render(timestamp, frame) {
-    if(pressedTime !== 0 && Date.now()-pressedTime > 800){
+    if(pressedTime !== 0 && Date.now()-pressedTime > 400){
         pressed = true;
         pressedTime = 0;
         if(modelExist[selected] !== undefined){
             deleteButton.style.width = "60px";
+            buttonUI2.style.height = "0px";
             objBox.setFromObject(modelExist[selected]);
             objBox.visible = true;
         }
@@ -224,6 +244,129 @@ function modelDisappear(selected){
     }, 10);
 }
 
+function modelDistance(cameraPos, modelPos){
+    let distance = Math.sqrt(Math.pow(modelPos.x-cameraPos.x, 2)+Math.pow(modelPos.y-cameraPos.y, 2)+Math.pow(modelPos.z-cameraPos.z, 2));
+    return 500 * (1/distance);
+}
+
+function initRecording() {
+   const jsRecord = document.getElementById('camera')
+   jsRecord.addEventListener('click', () => {
+      const session = renderer.xr.getSession && renderer.xr.getSession();
+      let readbackPixels = null
+      let pixelBuffer = null
+      let gl = renderer.getContext()
+      let readbackFramebuffer = gl.createFramebuffer()
+
+      if (session) {
+         let referenceSpace = renderer.xr.getReferenceSpace();
+
+         session.requestAnimationFrame((time, xrFrame) => {
+            let viewerPose = xrFrame.getViewerPose(referenceSpace);
+
+            console.log(viewerPose)
+            if (viewerPose) {
+               console.log(viewerPose.views)
+               for (const view of viewerPose.views) {
+                  console.log(view)
+                  if (view.camera) {
+                     let xrCamera = view.camera;
+                     let binding = new XRWebGLBinding(xrFrame.session, gl);
+                     let cameraTexture = binding.getCameraImage(xrCamera);
+                     let viewport = xrFrame.session.renderState.baseLayer.getViewport(view);
+
+                     let videoWidth = xrCamera.width;
+                     let videoHeight = xrCamera.height;
+
+                     let bytes = videoWidth * videoHeight * 4;
+
+                     if (bytes > 0) {
+                        if (!readbackPixels || readbackPixels.length != bytes) {
+                           readbackPixels = new Uint8Array(bytes);
+                        }
+
+                        readbackPixels.fill(0);
+
+                        gl.bindTexture(gl.TEXTURE_2D, cameraTexture);
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, readbackFramebuffer);
+                        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, cameraTexture, 0);
+
+                        if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE) {
+                           gl.readPixels(0, 0, videoWidth, videoHeight, gl.RGBA, gl.UNSIGNED_BYTE, readbackPixels);
+
+                           const canvas = document.createElement('canvas');
+                           canvas.width = videoWidth
+                           canvas.height = videoHeight
+                           const context = canvas.getContext('2d');
+
+                           // Flip the image
+                           let halfHeight = videoHeight / 2 | 0;
+                           let bytesPerRow = videoWidth * 4;
+
+                           let temp = new Uint8Array(bytesPerRow);
+                           for (let y = 0; y < halfHeight; ++y) {
+                              let topOffset = y * bytesPerRow;
+                              let bottomOffset = (videoHeight - y - 1) * bytesPerRow;
+
+                              temp.set(readbackPixels.subarray(topOffset, topOffset + bytesPerRow));
+                              readbackPixels.copyWithin(topOffset, bottomOffset, bottomOffset + bytesPerRow);
+                              readbackPixels.set(temp, bottomOffset);
+                           }
+
+                           // Draw the pixels into the new canvas
+                           const imgData = context.createImageData(videoWidth, videoHeight);
+                           imgData.data.set(readbackPixels);
+                           context.putImageData(imgData, 0, 0);
+
+                           if (renderer.xr.isPresenting) {
+                              renderer.xr.isPresenting = false;
+
+                              renderer.setFramebuffer(null);
+                              renderer.setRenderTarget(renderer.getRenderTarget());
+
+                              renderer.clear();
+                              renderer.render(scene, camera);
+                              threejsSceneImg = renderer.domElement.toDataURL('image/png');
+
+                              renderer.xr.isPresenting = true;
+                           }
+
+                           const img2 = new Image();
+                           img2.onload = function () {
+                              context.drawImage(img2, 0, 0, img2.width, img2.height, 0, 0, videoWidth, videoHeight);
+                              //session.end()
+                              saveFile(canvas.toDataURL('image/jpeg'), 'AR-photo-' + Date.now() + '.jpg')
+                           };
+                           img2.src = threejsSceneImg;
+                        } else {
+                           console.warn("Framebuffer incomplete!");
+                        }
+
+                        gl.bindFramebuffer(gl.FRAMEBUFFER, xrFrame.session.renderState.baseLayer.framebuffer);
+                     }
+                  } else {
+                     console.log("Please enable WebXR Incubations in chrome://flags")
+                  }
+               }
+            }
+         });
+      }
+   })
+}
+
+var saveFile = function (strData, filename) {
+   var link = document.createElement('a');
+   if (typeof link.download === 'string') {
+      document.body.appendChild(link); //Firefox requires the link to be in the body
+      link.download = filename;
+      link.href = strData;
+      link.click();
+      document.body.removeChild(link); //remove the link when done
+   } else {
+      location.replace(uri);
+   }
+}
+
 document.getElementById("AR").addEventListener('click', (e)=>{
     const click = e.target;
     while(!click.classList.contains('arButton')){
@@ -235,8 +378,8 @@ document.getElementById("AR").addEventListener('click', (e)=>{
     }
     menuSelected = click.dataset.value;
     ARButton.createButton(renderer,{
-        requiredFeatures : ["hit-test"],
-        optionalFeatures: ["dom-overlay"],
+        requiredFeatures: ['hit-test', 'dom-overlay'],
+        optionalFeatures: ['camera-access'],
         domOverlay: {root: document.body}
     }, menuSelected);
 
@@ -248,6 +391,7 @@ document.getElementById("AR").addEventListener('click', (e)=>{
 document.getElementById("button-menu").addEventListener('click', ()=>{
     document.getElementById("mySidenav").style.width = "240px";
     menuOpened = true;
+    camerabutton.style.display = "none";
 });
 
 document.getElementById("button-photo").addEventListener('click', ()=>{
@@ -256,6 +400,7 @@ document.getElementById("button-photo").addEventListener('click', ()=>{
         reticle.visible = false;
         buttonUI1.style.marginTop = "-30px";
         buttonUI2.style.height = "0px";
+        camerabutton.style.bottom = "50px";
     }
 });
 
@@ -276,6 +421,9 @@ document.getElementById("mySidenav").addEventListener('click', (e)=>{
         for(let i=0; i<models[menuSelected].length; i++){
             document.getElementById(models[menuSelected][i]).style.display = "flex";
         }
+        document.getElementById("mySidenav").style.width = "0";
+        menuOpened = false;
+        camerabutton.style.display = "block";
     }
 });
 
@@ -285,6 +433,7 @@ document.getElementById("main").addEventListener('touchstart', (e)=>{
         if(!(click.classList.contains('sidenav') || click.classList.contains('ar-object'))){
             document.getElementById("mySidenav").style.width = "0";
             menuOpened = false;
+            camerabutton.style.display = "block";
         }
     }
     else{
@@ -303,9 +452,16 @@ document.getElementById("main").addEventListener('touchstart', (e)=>{
                 const dot = document.createElement("div");
                 dot.classList.add("dot");
                 dot.id = "touchedBtn";
-                dot.style.backgroundImage = `url("./image/web_xr_image/${btnClicked.dataset.value}.png")`;
+                dot.style.backgroundImage = `url("../image/web_xr_image/${btnClicked.dataset.value}.png")`;
                 dot.style.display = "none";
                 document.body.append(dot);
+
+                const arrow = document.createElement("div");
+                arrow.classList.add("arrow");
+                arrow.id = "arrow";
+                arrow.style.backgroundImage = `url("../image/web_xr_image/arrow.png")`;
+                arrow.style.display = "block";
+                document.body.append(arrow);
             }
         }
     }
@@ -314,14 +470,16 @@ document.getElementById("main").addEventListener('touchstart', (e)=>{
 document.getElementById("main").addEventListener('touchmove', (e)=>{
     if(btnClicked !== null){
         const dot = document.getElementById("touchedBtn");
+        const arrow = document.getElementById("arrow");
         if(e.touches[0].pageY < window.innerHeight-150){
-            //console.log(`${btnClicked.dataset.value} moving`);
             dot.style.top = `${e.touches[0].pageY}px`;
             dot.style.left = `${e.touches[0].pageX}px`;
             dot.style.display = "block";
+            arrow.style.display = "none";
             dropReady = true;
         }
         else{
+            arrow.style.display = "block";
             dot.style.display = "none";
             dropReady = false;
         }
@@ -331,9 +489,10 @@ document.getElementById("main").addEventListener('touchmove', (e)=>{
 document.getElementById("main").addEventListener('touchend', ()=>{
     if(btnClicked !== null){
         const dot = document.getElementById("touchedBtn");
+        const arrow = document.getElementById("arrow");
         dot.remove();
+        arrow.remove();
         if(dropReady === true){
-            //console.log(`${btnClicked.dataset.value} drop`);
             if(reticle.visible){
                 loadGLBFile(selected, reticle);
             }
@@ -344,12 +503,17 @@ document.getElementById("main").addEventListener('touchend', ()=>{
     }
 })
 
+camerabutton.addEventListener('click', e=>{
+    console.log("photo");
+})
+
 touchScreen.addEventListener('touchstart', e=>{
     if(e.targetTouches.length == 1){
         if(cameraMode === true){
             cameraMode = false;
             buttonUI1.style.marginTop = "20px";
             buttonUI2.style.height = "150px";
+            camerabutton.style.bottom = "-70px";
         }
         else{
             singleTouchDown = true;
@@ -360,7 +524,6 @@ touchScreen.addEventListener('touchstart', e=>{
             raycaster.far = 1000;
             pointer.x = (touchX1/window.innerWidth) * 2 - 1;
             pointer.y = -(touchY1/window.innerHeight) * 2 + 1;
-            console.log(pointer);
             raycaster.setFromCamera(pointer, camera);
             if(Object.keys(modelExist).length > 0){
                 const intersectsArray = raycaster.intersectObjects(Object.values(modelExist));
@@ -393,6 +556,7 @@ touchScreen.addEventListener('touchstart', e=>{
         pressed = false;
         objBox.visible = false;
         deleteButton.style.width = "0px";
+        buttonUI2.style.height = "150px";
         pressedTime = 0;
         raycaster.far = 0;
 
@@ -418,6 +582,7 @@ touchScreen.addEventListener('touchend', e=>{
             pressed = false;
             if(objBox !== undefined) objBox.visible = false;
             deleteButton.style.width = "0px";
+            buttonUI2.style.height = "150px";
         }
     }
     else if(e.targetTouches.length == 1){
@@ -460,8 +625,8 @@ touchScreen.addEventListener('touchmove', e=>{
             cameraAngle.normalize();
             cameraAngle.rotateAround(new THREE.Vector2(), Math.PI/2);
             modelMove.rotateAround(new THREE.Vector2(), cameraAngle.angle());
-            modelExist[selected].position.x += modelMove.x/300;
-            modelExist[selected].position.z += modelMove.y/300;
+            modelExist[selected].position.x += modelMove.x/modelDistance(camera.position, modelExist[selected].position);
+            modelExist[selected].position.z += modelMove.y/modelDistance(camera.position, modelExist[selected].position);
             objBox.update();
         }
     }

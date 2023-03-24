@@ -136,7 +136,7 @@ body.before-load {
   float: left;
   margin-right: 0.2em; /*위와 마찬가지로 이 글자 크기의 0.2배 정도 여백을 하고 싶어서(계산 쉬움)*/
   font-size: 3rem;
-  color: var(--apple_black);
+  color: var(--apple_white);
 }
 .sticky-elem.desc-message {
 	width: 45%;

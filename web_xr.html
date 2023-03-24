@@ -11,8 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/three@0.133.0/build/three.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/three@0.126.0/build/three.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/DRACOLoader.js"></script>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 </head>
 
@@ -45,10 +46,10 @@
     </section>
     <div id="main">
         <div id="mySidenav" class="sidenav">
-            <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="0" href="#">
-            <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="1" href="#">
-            <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="2" href="#">
-            <img class="ar-object" src="./image/web_xr_image/SAMPLE.jpg" data-value="3" href="#">
+            <img class="ar-object" src="./image/web_xr_image/london2.png" data-value="0" href="#">
+            <img class="ar-object" src="./image/web_xr_image/paris2.png" data-value="1" href="#">
+            <img class="ar-object" src="./image/web_xr_image/rome2.png" data-value="2" href="#">
+            <img class="ar-object" src="./image/web_xr_image/praque2.png" data-value="3" href="#">
         </div>
         <section class="container touchScreen" id="topSection">
             <div class="icon-buttons" id="icon-buttons">
@@ -62,36 +63,32 @@
         </section>
         <section class="container" id="bottomSection">
             <div class="buttons" id="buttons">
-                <div class="modelSelect" id="golf" data-value="golf">
-                    <img src="./image/web_xr_image/golf.png"></div>
-                <div class="modelSelect" id="nike" data-value="nike">
-                    <img src="./image/web_xr_image/nike.png"></div>
-                <div class="modelSelect" id="padding" data-value="padding">
-                    <img src="./image/web_xr_image/padding.png"></div>
-                <div class="modelSelect" id="pilates" data-value="pilates">
-                    <img src="./image/web_xr_image/pilates.png"></div>
-                <div class="modelSelect" id="backpack" data-value="backpack">
-                    <img src="./image/web_xr_image/backpack.png"></div>
-                <div class="modelSelect" id="ballet" data-value="ballet">
-                    <img src="./image/web_xr_image/ballet.png"></div>
-                <div class="modelSelect" id="bikini" data-value="bikini">
-                    <img src="./image/web_xr_image/bikini.png"></div>
+                <!-- London -->
+                <div class="modelSelect" id="bus" data-value="bus">
+                    <img src="./image/web_xr_image/bus.png"></div>
+                <div class="modelSelect" id="phonebox" data-value="phonebox">
+                    <img src="./image/web_xr_image/phonebox.png"></div>
 
-                <div class="modelSelect" id="sofa1" data-value="sofa1">
-                    <img src="./image/web_xr_image/sofa1.png"></div>
-                <div class="modelSelect" id="sofa2" data-value="sofa2">
-                    <img src="./image/web_xr_image/sofa2.png"></div>
-                <div class="modelSelect" id="carpet" data-value="carpet">
-                    <img src="./image/web_xr_image/carpet.png"></div>
-
+                <!-- Paris -->
                 <div class="modelSelect" id="eiffel" data-value="eiffel">
                     <img src="./image/web_xr_image/eiffel.png"></div>
                 <div class="modelSelect" id="croissant" data-value="croissant">
                     <img src="./image/web_xr_image/croissant.png"></div>
-                <div class="modelSelect" id="bus" data-value="bus">
-                    <img src="./image/web_xr_image/bus.png"></div>
-            </section>
-    </div>
+                <div class="modelSelect" id="monalisa" data-value="monalisa">
+                    <img src="./image/web_xr_image/monalisa.png"></div>
+
+                <!-- Rome -->
+                <div class="modelSelect" id="colosseum" data-value="colosseum">
+                    <img src="./image/web_xr_image/colosseum.png"></div>
+                <div class="modelSelect" id="gelato" data-value="gelato">
+                    <img src="./image/web_xr_image/gelato.png"></div>
+                <div class="modelSelect" id="pizza" data-value="pizza">
+                    <img src="./image/web_xr_image/pizza.png"></div>
+
+                <!-- Praque -->
+            </div>
+        </section>
+        <div class="circle" id="camera"></div>
    <script type="module" src="./js/web_xr_js.js"></script>
 </body>
 
