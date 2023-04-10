@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/three@0.126.0/build/three.js" crossorigin="anonymous"></script>
+    <script src="./js/three.js"></script>
     <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://unpkg.com/three@0.133.0/examples/js/loaders/DRACOLoader.js"></script>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
@@ -44,6 +44,13 @@
             <div class="arButton praha" id="3" data-value="3">null</div>
         </div>
     </section>
+    <div id="camera-init">
+        <div class="init">
+            핸드폰을 움직여 주세요
+            <img id="hand-icon" src="./img/hand-phone.png">
+        </div>
+    </div>
+    <div id="photo-click"></div>
     <div id="main">
         <div id="mySidenav" class="sidenav">
             <img class="ar-object" src="./image/web_xr_image/london2.png" data-value="0" href="#">

@@ -9,8 +9,7 @@ let threejsSceneImg = null;
 const models = [['bus', 'phonebox'], //London
                 ['eiffel', 'croissant', 'monalisa'], //Paris
                 ['colosseum', 'gelato', 'pizza'], //Rome
-                [], //Praque
-                ];
+                []] //Praque
 const modelExist = {};
 let menuSelected = 0; //null
 let selected = null;
@@ -24,6 +23,8 @@ const buttonUI2 = document.getElementById("bottomSection");
 const camerabutton = document.getElementById("camera");
 const touchScreen = document.getElementById("topSection");
 const deleteButton = document.getElementById("delete");
+const initCamera = document.getElementById("camera-init");
+const photoClick = document.getElementById("photo-click");
 
 let singleTouchDown=false, doubleTouchDown=false, pressed=false;
 let touchX1, touchY1, touchX2, touchY2, deltaX1=0, deltaY1=0;
@@ -74,7 +75,7 @@ function init() {
     dracoLoader = new THREE.DRACOLoader();
     dracoLoader.setDecoderPath('../draco/');
     loader.setDRACOLoader(dracoLoader);
-
+    
     addReticleToScene();
 
     renderer.domElement.style.display = "none";
@@ -94,14 +95,13 @@ function addReticleToScene(){
     material2.transparent = true;
     material2.opacity = 0.3;
 
-    const group = new THREE.Group();
-    group.add(new THREE.Mesh(ring1, material));
-    group.add(new THREE.Mesh(ring2, material));
-    group.add(new THREE.Mesh(ring3, material));
-    group.add(new THREE.Mesh(ring4, material));
-    group.add(new THREE.Mesh(circle, material2));
+    reticle = new THREE.Group();
+    reticle.add(new THREE.Mesh(ring1, material));
+    reticle.add(new THREE.Mesh(ring2, material));
+    reticle.add(new THREE.Mesh(ring3, material));
+    reticle.add(new THREE.Mesh(ring4, material));
+    reticle.add(new THREE.Mesh(circle, material2));
 
-    reticle = group;
     reticle.matrixAutoUpdate = false;
     reticle.visible = false;
     scene.add(reticle);
@@ -117,16 +117,16 @@ function loadGLBFile(select, reti){
                 glb.scene.scale.set(0,0,0);
                 scene.add(glb.scene);
                 modelExist[select] = glb.scene;
-                
+                /*
                 glb.scene.traverse((child)=>{ //material 바꾸기
                     if(!child.isMesh) return;
                     else{
                         const prevMaterial = child.material;
-                        child.material = new THREE.MeshPhongMaterial();
+                        child.material = new THREE.MeshStandardMaterial();
                         THREE.MeshBasicMaterial.prototype.copy.call(child.material, prevMaterial);
                     }
                 });
-                
+                */
                 modelAppear(select);
 
                 if(objBox === undefined){ //objBox 한번만 소환해놓기
@@ -198,15 +198,19 @@ function render(timestamp, frame) {
         if(!hitTestSourceInitialized){
             initializeHitTestSource();
         }
-        if(hitTestSourceInitialized && cameraMode === false){
+        if(hitTestSourceInitialized){
+            if(cameraMode === false){
             const hitTestResults = frame.getHitTestResults(hitTestSource); //array
-            if(hitTestResults.length > 0){
-                const hit = hitTestResults[0]; //closest to the camera
-                const pose = hit.getPose(localSpace); //local point
-                reticle.visible = true;
-                reticle.matrix.fromArray(pose.transform.matrix);
-            } else {
-                reticle.visible = false;
+                if(hitTestResults.length > 0){
+                    const hit = hitTestResults[0]; //closest to the camera
+                    const pose = hit.getPose(localSpace); //local point
+                    reticle.visible = true;
+                    reticle.matrix.fromArray(pose.transform.matrix);
+                    initCamera.style.display = "none";
+                } else {
+                    reticle.visible = false;
+                    initCamera.style.display = "block";
+                }
             }
         }
         renderer.render(scene, camera);
@@ -250,30 +254,28 @@ function modelDistance(cameraPos, modelPos){
 }
 
 function initRecording() {
-   const jsRecord = document.getElementById('camera')
-   jsRecord.addEventListener('click', () => {
+   camerabutton.addEventListener('click', () => {
+
+        photoClick.classList.add("photo-click");
+        setTimeout(()=>{
+            photoClick.classList.remove("photo-click");
+        }, 700);
+
       const session = renderer.xr.getSession && renderer.xr.getSession();
       let readbackPixels = null
-      let pixelBuffer = null
       let gl = renderer.getContext()
       let readbackFramebuffer = gl.createFramebuffer()
 
       if (session) {
          let referenceSpace = renderer.xr.getReferenceSpace();
-
          session.requestAnimationFrame((time, xrFrame) => {
             let viewerPose = xrFrame.getViewerPose(referenceSpace);
-
-            console.log(viewerPose)
             if (viewerPose) {
-               console.log(viewerPose.views)
                for (const view of viewerPose.views) {
-                  console.log(view)
                   if (view.camera) {
                      let xrCamera = view.camera;
                      let binding = new XRWebGLBinding(xrFrame.session, gl);
                      let cameraTexture = binding.getCameraImage(xrCamera);
-                     let viewport = xrFrame.session.renderState.baseLayer.getViewport(view);
 
                      let videoWidth = xrCamera.width;
                      let videoHeight = xrCamera.height;
@@ -452,16 +454,16 @@ document.getElementById("main").addEventListener('touchstart', (e)=>{
                 const dot = document.createElement("div");
                 dot.classList.add("dot");
                 dot.id = "touchedBtn";
-                dot.style.backgroundImage = `url("../image/web_xr_image/${btnClicked.dataset.value}.png")`;
+                dot.style.backgroundImage = `../image/web_xr_image/${btnClicked.dataset.value}.png")`;
                 dot.style.display = "none";
-                document.body.append(dot);
+                document.body.appendChild(dot);
 
                 const arrow = document.createElement("div");
                 arrow.classList.add("arrow");
                 arrow.id = "arrow";
                 arrow.style.backgroundImage = `url("../image/web_xr_image/arrow.png")`;
                 arrow.style.display = "block";
-                document.body.append(arrow);
+                document.body.appendChild(arrow);
             }
         }
     }
@@ -501,10 +503,6 @@ document.getElementById("main").addEventListener('touchend', ()=>{
         btnClicked.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
         btnClicked = null;
     }
-})
-
-camerabutton.addEventListener('click', e=>{
-    console.log("photo");
 })
 
 touchScreen.addEventListener('touchstart', e=>{
