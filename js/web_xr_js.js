@@ -1,5 +1,3 @@
-setupMobileDebug();
-
 import { ARButton } from './ARButton.js';
 
 let scene, camera, raycaster, renderer, session;
@@ -35,18 +33,6 @@ let pressedTime = 0;
 init();
 animate();
 initRecording();
-
-function setupMobileDebug() {
-    // First thing we do is setup the mobile debug console
-    // This library is very big so only use it while debugging
-    // just comment it out when your app is done
-    const containerEl = document.getElementById("console-ui");
-    eruda.init({
-      container: containerEl
-    });
-    const devToolEl = containerEl.shadowRoot.querySelector('.eruda-dev-tools');
-    devToolEl.style.height = '40%'; // control the height of the dev tool panel
-}
 
 function init() {
     const container = document.createElement('div');
