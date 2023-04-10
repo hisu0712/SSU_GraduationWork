@@ -440,7 +440,7 @@ document.getElementById("main").addEventListener('touchstart', (e)=>{
                 const dot = document.createElement("div");
                 dot.classList.add("dot");
                 dot.id = "touchedBtn";
-                dot.style.backgroundImage = `../image/web_xr_image/${btnClicked.dataset.value}.png")`;
+                dot.style.backgroundImage = `url("../image/web_xr_image/${btnClicked.dataset.value}.png")`;
                 dot.style.display = "none";
                 document.body.appendChild(dot);
 
