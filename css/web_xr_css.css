@@ -347,8 +347,33 @@ a, button, input, select {
   }
 }
 
+@media (max-width: 500px){
+	#AR{
+		padding-top: 0px;
+  	grid-template-columns: unset;
+		grid-gap: 0;
+  }
+	.arButton{
+		width: calc(100vw + 25px);
+		height: calc(25vh - 13px);
+	}
+	.arButton.london{
+		background-position: 60% 40%
+	}
+	.arButton.paris{
+		background-position: 60% 40%
+	}
+	.arButton.italy{
+		background-position: 60% 40%
+	}
+	.arButton.praha{
+		background-position: 60% 40%
+	}
+}
+
+/*
 @media (max-width: 490px){
-  /*모바일버전에서는 그리드 한줄 정렬*/
+  /*모바일버전에서는 그리드 한줄 정렬
   #AR{
 		padding-top: 20px;
   	grid-template-columns: unset;
@@ -358,3 +383,4 @@ a, button, input, select {
 		height: 160px;
 	}
 }
+*/
